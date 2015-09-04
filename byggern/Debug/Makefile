@@ -38,6 +38,7 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../byggern.c \
+../SRAM_test.c \
 ../USART_driver.c
 
 
@@ -49,18 +50,22 @@ ASM_SRCS +=
 
 OBJS +=  \
 byggern.o \
+SRAM_test.o \
 USART_driver.o
 
 OBJS_AS_ARGS +=  \
 byggern.o \
+SRAM_test.o \
 USART_driver.o
 
 C_DEPS +=  \
 byggern.d \
+SRAM_test.d \
 USART_driver.d
 
 C_DEPS_AS_ARGS +=  \
 byggern.d \
+SRAM_test.d \
 USART_driver.d
 
 OUTPUT_FILE_PATH +=byggern.elf
@@ -77,6 +82,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

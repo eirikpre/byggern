@@ -4,5 +4,7 @@
 
 byggern.c
 
+SRAM_test.c
+
 USART_driver.c
 

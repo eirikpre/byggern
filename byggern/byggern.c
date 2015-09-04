@@ -3,13 +3,15 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include "USART_driver.h"
+#include "SRAM_test.h"
 
 
 
 int main(void)
-{	
+{
+
 	USART_init(MYUBRR);
-	
+	/*
 	DDRA = 0x51;
 	_delay_ms(2000);
     while(1)
@@ -21,4 +23,10 @@ int main(void)
 		printf("hLLO");
 		
     }
+	*/
+	
+	MCUCR |= (1 << SRE);
+	
+	SRAM_test();
+	
 }
