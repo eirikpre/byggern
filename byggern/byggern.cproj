@@ -124,6 +124,15 @@
     <Compile Include="joystick.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="oled.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="oled.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="oled_font.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="SRAM_test.c">
       <SubType>compile</SubType>
     </Compile>

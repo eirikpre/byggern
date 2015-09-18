@@ -8,6 +8,8 @@ byggern.c
 
 joystick.c
 
+oled.c
+
 SRAM_test.c
 
 USART_driver.c

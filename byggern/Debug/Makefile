@@ -40,6 +40,7 @@ C_SRCS +=  \
 ../ADC.c \
 ../byggern.c \
 ../joystick.c \
+../oled.c \
 ../SRAM_test.c \
 ../USART_driver.c
 
@@ -54,6 +55,7 @@ OBJS +=  \
 ADC.o \
 byggern.o \
 joystick.o \
+oled.o \
 SRAM_test.o \
 USART_driver.o
 
@@ -61,6 +63,7 @@ OBJS_AS_ARGS +=  \
 ADC.o \
 byggern.o \
 joystick.o \
+oled.o \
 SRAM_test.o \
 USART_driver.o
 
@@ -68,6 +71,7 @@ C_DEPS +=  \
 ADC.d \
 byggern.d \
 joystick.d \
+oled.d \
 SRAM_test.d \
 USART_driver.d
 
@@ -75,6 +79,7 @@ C_DEPS_AS_ARGS +=  \
 ADC.d \
 byggern.d \
 joystick.d \
+oled.d \
 SRAM_test.d \
 USART_driver.d
 
@@ -92,6 +97,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
