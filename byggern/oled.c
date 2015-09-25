@@ -3,10 +3,12 @@
 #include <avr/pgmspace.h>
 #include "oled.h"
 #include "oled_font.h"
-void oled_print_char(char* input);
+
+
+
 void oled_print_char(char* input){
 	int i;
-	for(i = 0; i<4 ;i++)
+	for(i = 0; i<8 ;i++)
 	{
 		write_d(pgm_read_byte(&font[*input - ' '][i]));
 	}

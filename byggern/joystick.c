@@ -41,6 +41,34 @@ joy_position_t get_position(){
 }
 
 
-void get_direction(){
+direction get_direction(){
+	
+	joy_position_t position = get_position();
+	
+	if (position.x_pos > 70)
+		{
+
+			return RIGHT;
+		}
+	else if (position.x_pos < -70)
+		{
+
+			return LEFT;
+		}
+	else if (position.y_pos > 70)
+		{
+
+			return UP;
+		}
+	else if (position.y_pos < -70)
+		{
+
+			return DOWN;
+		}
+	else
+		{
+
+			return NEUTRAL;
+		}
 	
 }

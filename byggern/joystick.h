@@ -3,12 +3,12 @@
 #define JOYSTICK_H_
 
 typedef enum{
-	LEFT = 0,
-	RIGTH = 1,
-	UP = 2,
-	DOWN = 3,
-	NEUTRAL = 4
-} Direction;
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	NEUTRAL
+} direction;
 
 typedef struct{
 	int x_pos;
@@ -16,11 +16,12 @@ typedef struct{
 }joy_position_t;
 
 
+
 void joy_init();
 
 joy_position_t get_position();
 
-void get_direction();
+direction get_direction();
 
 
 #endif

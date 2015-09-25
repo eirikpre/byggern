@@ -8,6 +8,7 @@
 #include "ADC.h"
 #include "joystick.h"
 #include "oled.h"
+#include "menu.h"
 
 
 
@@ -17,16 +18,19 @@ int main(void)
 	USART_init(MYUBRR);
 	// Activate external memory
 	MCUCR |= (1 << SRE);
+	
 		
 	joy_init();
 	
 	oled_init();
-	char a[] = "ABCD";
+	//char a[] = "ABCD";
 	
 	oled_clear_all();
 	
 	//oled_goto(0,64);
-	oled_print(a);
+	menu_init();
+	
+	
 	while(1){
 		//printf("X:%4d       ", ADC_read(1));
 		//printf("Y:%4d \n", ADC_read(0)); 
