@@ -6,11 +6,17 @@ ADC.c
 
 byggern.c
 
+can_com.c
+
+can_control.c
+
 joystick.c
 
 menu.c
 
 oled.c
+
+spi_control.c
 
 SRAM_test.c
 

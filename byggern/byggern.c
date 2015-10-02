@@ -9,7 +9,7 @@
 #include "joystick.h"
 #include "oled.h"
 #include "menu.h"
-
+#include "spi_control.h"
 
 
 int main(void)
@@ -25,8 +25,8 @@ int main(void)
 	oled_init();
 	//char a[] = "ABCD";
 	
-	oled_clear_all();
 	
+	spi_init();
 	//oled_goto(0,64);
 	menu_init();
 	

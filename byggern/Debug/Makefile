@@ -39,9 +39,12 @@ SUBDIRS :=
 C_SRCS +=  \
 ../ADC.c \
 ../byggern.c \
+../can_com.c \
+../can_control.c \
 ../joystick.c \
 ../menu.c \
 ../oled.c \
+../spi_control.c \
 ../SRAM_test.c \
 ../USART_driver.c
 
@@ -55,36 +58,48 @@ ASM_SRCS +=
 OBJS +=  \
 ADC.o \
 byggern.o \
+can_com.o \
+can_control.o \
 joystick.o \
 menu.o \
 oled.o \
+spi_control.o \
 SRAM_test.o \
 USART_driver.o
 
 OBJS_AS_ARGS +=  \
 ADC.o \
 byggern.o \
+can_com.o \
+can_control.o \
 joystick.o \
 menu.o \
 oled.o \
+spi_control.o \
 SRAM_test.o \
 USART_driver.o
 
 C_DEPS +=  \
 ADC.d \
 byggern.d \
+can_com.d \
+can_control.d \
 joystick.d \
 menu.d \
 oled.d \
+spi_control.d \
 SRAM_test.d \
 USART_driver.d
 
 C_DEPS_AS_ARGS +=  \
 ADC.d \
 byggern.d \
+can_com.d \
+can_control.d \
 joystick.d \
 menu.d \
 oled.d \
+spi_control.d \
 SRAM_test.d \
 USART_driver.d
 
@@ -102,6 +117,12 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 

@@ -118,10 +118,25 @@
     <Compile Include="byggern.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="can_com.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can_com.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can_control.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can_control.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="joystick.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="joystick.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCP2515.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="menu.c">
@@ -137,6 +152,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="oled_font.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="spi_control.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="spi_control.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="SRAM_test.c">
