@@ -4,11 +4,11 @@
 
 ADC.c
 
-byggern.c
+main.c
 
 can_com.c
 
-can_control.c
+MCP2515.c
 
 joystick.c
 

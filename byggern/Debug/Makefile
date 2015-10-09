@@ -38,9 +38,9 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../ADC.c \
-../byggern.c \
+../main.c \
 ../can_com.c \
-../can_control.c \
+../MCP2515.c \
 ../joystick.c \
 ../menu.c \
 ../oled.c \
@@ -57,9 +57,9 @@ ASM_SRCS +=
 
 OBJS +=  \
 ADC.o \
-byggern.o \
+main.o \
 can_com.o \
-can_control.o \
+MCP2515.o \
 joystick.o \
 menu.o \
 oled.o \
@@ -69,9 +69,9 @@ USART_driver.o
 
 OBJS_AS_ARGS +=  \
 ADC.o \
-byggern.o \
+main.o \
 can_com.o \
-can_control.o \
+MCP2515.o \
 joystick.o \
 menu.o \
 oled.o \
@@ -81,9 +81,9 @@ USART_driver.o
 
 C_DEPS +=  \
 ADC.d \
-byggern.d \
+main.d \
 can_com.d \
-can_control.d \
+MCP2515.d \
 joystick.d \
 menu.d \
 oled.d \
@@ -93,9 +93,9 @@ USART_driver.d
 
 C_DEPS_AS_ARGS +=  \
 ADC.d \
-byggern.d \
+main.d \
 can_com.d \
-can_control.d \
+MCP2515.d \
 joystick.d \
 menu.d \
 oled.d \

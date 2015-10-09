@@ -1,21 +1,20 @@
-#include "can_control.h"
-#include "spi_control.h"
 #include "MCP2515.h"
+#include "spi_control.h"
 #include <stdio.h>
 
 void mcp2515_init(){
 	char status;
 	spi_init();
-	can_reset();
+	mcp2515_reset();
 	
-	status = can_read_status();
-	if ((status& MODE_MASK) != MODE_CONFIG)
+	status = mcp2515_read_status();
+	if ((status & MODE_MASK) != MODE_CONFIG)
 	{
 		printf("MCP2515 is not in config mode!\n");
 	}
 	
 }
-char can_read (char addr){
+char mcp2515_read (char addr){
 	char result;
 	
 	spi_select();
@@ -29,7 +28,7 @@ char can_read (char addr){
 	return result;
 }
 
-void can_write(char addr, char data)
+void mcp2515_write(char addr, char data)
 {
 	spi_select();
 	
@@ -41,7 +40,7 @@ void can_write(char addr, char data)
 	
 }
 
-void can_request_to_send(int reg)
+void mcp2515_request_to_send(int reg)
 {
 	spi_select();
 	
@@ -50,7 +49,7 @@ void can_request_to_send(int reg)
 	spi_deselect();
 }
 
-void can_bit_modify(char addr, char mask_byte, char data)
+void mcp2515_bit_modify(char addr, char mask_byte, char data)
 {
 	spi_select();
 	
@@ -62,7 +61,7 @@ void can_bit_modify(char addr, char mask_byte, char data)
 	spi_deselect();
 }
 
-void can_reset()
+void mcp2515_reset()
 {
 	spi_select();
 	
@@ -71,11 +70,11 @@ void can_reset()
 	spi_deselect();
 }
 
-char can_read_status()
+char mcp2515_read_status()
 {
 	char output;
 	spi_select();
-	
+	spi_transmit(MCP_READ);
 	spi_transmit(MCP_CANSTAT);
 	output = spi_receive();
 	

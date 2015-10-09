@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include "spi_control.h"
 #include "util/delay.h"
-#include "can_control.h"
 #include "MCP2515.h"
 
 
@@ -66,13 +65,6 @@ void menu_fsm(){
 	direction last_dir = NEUTRAL;
 	while(1){
 		menu_handler(&curr_dir, &last_dir);
-		
-		
-		can_reset(); //inti
-		//can_bit_modify(MCP_CANCTRL,0x70,MODE_LOOPBACK);
-		//can_write(0x0a,'A');
-		_delay_ms(50);
-		printf("%d\n",can_read(MCP_CANSTAT));
 		
 		
 		

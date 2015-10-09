@@ -24,8 +24,6 @@ void joy_calibrate(){
 	x_ref = sum_x/10;
 	y_ref = sum_y/10;
 	
-	
-	printf("Calibration finished with values:\nX:%d    Y:%d\n",x_ref,y_ref);
 }
 
 void joy_init(){

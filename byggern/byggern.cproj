@@ -115,7 +115,7 @@
     <Compile Include="ADC.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="byggern.c">
+    <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="can_com.c">
@@ -124,10 +124,7 @@
     <Compile Include="can_com.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="can_control.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="can_control.h">
+    <Compile Include="MCP2515.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="joystick.c">

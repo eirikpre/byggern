@@ -6,12 +6,22 @@ mcp2515.h
 
 This file contains constants that are specific to the MCP2515.
 
+ + own fuctions
+
 Version     Date        Description
 ----------------------------------------------------------------------
 v1.00       2003/12/11  Initial release
 
 Copyright 2003 Kimberly Otten Software Consulting
 */
+
+void mcp2515_init();
+char mcp2515_read (char addr);
+void mcp2515_write(char addr, char data);
+void mcp2515_request_to_send(int reg);
+void mcp2515_bit_modify(char addr, char mask_byte, char data);
+void mcp2515_reset();
+char mcp2515_read_status();
 
 // Define MCP2515 register addresses
 
