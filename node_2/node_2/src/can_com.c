@@ -7,6 +7,7 @@ void can_init()
 	
 	mcp2515_init();
 	
+	// Set filter-masks to zero
 	mcp2515_bit_modify(MCP_RXF0SIDH, 0xff , 0x00);
 	mcp2515_bit_modify(MCP_RXF0SIDL, 0xE0 , 0x00);
 	

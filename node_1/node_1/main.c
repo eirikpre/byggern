@@ -25,35 +25,22 @@ int main(void)
 	joy_init();
 	
 	oled_init();
-
-
-	
-
-	
 	
 	can_init();
-	mcp2515_bit_modify(MCP_CANCTRL, 0xE0 , MODE_LOOPBACK);
-	can_message_t msg1 = {'f', 0x8, "hallo123"}; 
-	can_message_t msg2;
+
+	can_message_t msg;
+
 	
-	can_message_send(&msg1);
-	_delay_ms(40);
-	can_message_receive(&msg2);
-	printf("ID: %d ,Length: %d, ",msg2.id,msg2.length);
-	int i ;
-	for (i=0; i<8;i++)
-	{
-		printf("%c", msg2.data[i]);
-	}
-	printf("\n");
-	
-	
-	menu_init();
+	//menu_init();
 	
 	while(1){
-		
-		
-		
+			if(can_get_message(&msg)==1){
+				can_print(msg);
+			}
+			
+			
+			_delay_ms(40);
+
 		
 		
 		
@@ -67,4 +54,15 @@ int main(void)
 		//printf("x_pos:%d         y_pos:%d\n",test.x_pos,test.y_pos);
 		
 	}
+}
+
+void can_print(can_message_t msg)
+{
+	printf("ID: %d ,Length: %d, ",msg.id,msg.length);
+	int i ;
+	for (i=0; i<8;i++)
+	{
+		printf("%c", msg.data[i]);
+	}
+	printf("\n");
 }

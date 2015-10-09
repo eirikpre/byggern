@@ -1,0 +1,626 @@
+
+node_2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000002a  00800200  000002f4  00000388  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000002f4  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000006  0080022a  0080022a  000003b2  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000003b2  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000e0  00000000  00000000  000003e2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000900  00000000  00000000  000004c2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000458  00000000  00000000  00000dc2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000009b5  00000000  00000000  0000121a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000001b4  00000000  00000000  00001bd0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00009640  00000000  00000000  00001d84  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000003cd  00000000  00000000  0000b3c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000a0  00000000  00000000  0000b791  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_macro  00003bd1  00000000  00000000  0000b831  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	71 c0       	rjmp	.+226    	; 0xe4 <__ctors_end>
+   2:	00 00       	nop
+   4:	8e c0       	rjmp	.+284    	; 0x122 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	8c c0       	rjmp	.+280    	; 0x122 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	8a c0       	rjmp	.+276    	; 0x122 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	88 c0       	rjmp	.+272    	; 0x122 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	86 c0       	rjmp	.+268    	; 0x122 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	84 c0       	rjmp	.+264    	; 0x122 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	82 c0       	rjmp	.+260    	; 0x122 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	80 c0       	rjmp	.+256    	; 0x122 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	7e c0       	rjmp	.+252    	; 0x122 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	7c c0       	rjmp	.+248    	; 0x122 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	7a c0       	rjmp	.+244    	; 0x122 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	78 c0       	rjmp	.+240    	; 0x122 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	76 c0       	rjmp	.+236    	; 0x122 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	74 c0       	rjmp	.+232    	; 0x122 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	72 c0       	rjmp	.+228    	; 0x122 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	70 c0       	rjmp	.+224    	; 0x122 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	6e c0       	rjmp	.+220    	; 0x122 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	6c c0       	rjmp	.+216    	; 0x122 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	6a c0       	rjmp	.+212    	; 0x122 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	68 c0       	rjmp	.+208    	; 0x122 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	66 c0       	rjmp	.+204    	; 0x122 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	64 c0       	rjmp	.+200    	; 0x122 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	62 c0       	rjmp	.+196    	; 0x122 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	60 c0       	rjmp	.+192    	; 0x122 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	5e c0       	rjmp	.+188    	; 0x122 <__bad_interrupt>
+  66:	00 00       	nop
+  68:	5c c0       	rjmp	.+184    	; 0x122 <__bad_interrupt>
+  6a:	00 00       	nop
+  6c:	5a c0       	rjmp	.+180    	; 0x122 <__bad_interrupt>
+  6e:	00 00       	nop
+  70:	58 c0       	rjmp	.+176    	; 0x122 <__bad_interrupt>
+  72:	00 00       	nop
+  74:	56 c0       	rjmp	.+172    	; 0x122 <__bad_interrupt>
+  76:	00 00       	nop
+  78:	54 c0       	rjmp	.+168    	; 0x122 <__bad_interrupt>
+  7a:	00 00       	nop
+  7c:	52 c0       	rjmp	.+164    	; 0x122 <__bad_interrupt>
+  7e:	00 00       	nop
+  80:	50 c0       	rjmp	.+160    	; 0x122 <__bad_interrupt>
+  82:	00 00       	nop
+  84:	4e c0       	rjmp	.+156    	; 0x122 <__bad_interrupt>
+  86:	00 00       	nop
+  88:	4c c0       	rjmp	.+152    	; 0x122 <__bad_interrupt>
+  8a:	00 00       	nop
+  8c:	4a c0       	rjmp	.+148    	; 0x122 <__bad_interrupt>
+  8e:	00 00       	nop
+  90:	48 c0       	rjmp	.+144    	; 0x122 <__bad_interrupt>
+  92:	00 00       	nop
+  94:	46 c0       	rjmp	.+140    	; 0x122 <__bad_interrupt>
+  96:	00 00       	nop
+  98:	44 c0       	rjmp	.+136    	; 0x122 <__bad_interrupt>
+  9a:	00 00       	nop
+  9c:	42 c0       	rjmp	.+132    	; 0x122 <__bad_interrupt>
+  9e:	00 00       	nop
+  a0:	40 c0       	rjmp	.+128    	; 0x122 <__bad_interrupt>
+  a2:	00 00       	nop
+  a4:	3e c0       	rjmp	.+124    	; 0x122 <__bad_interrupt>
+  a6:	00 00       	nop
+  a8:	3c c0       	rjmp	.+120    	; 0x122 <__bad_interrupt>
+  aa:	00 00       	nop
+  ac:	3a c0       	rjmp	.+116    	; 0x122 <__bad_interrupt>
+  ae:	00 00       	nop
+  b0:	38 c0       	rjmp	.+112    	; 0x122 <__bad_interrupt>
+  b2:	00 00       	nop
+  b4:	36 c0       	rjmp	.+108    	; 0x122 <__bad_interrupt>
+  b6:	00 00       	nop
+  b8:	34 c0       	rjmp	.+104    	; 0x122 <__bad_interrupt>
+  ba:	00 00       	nop
+  bc:	32 c0       	rjmp	.+100    	; 0x122 <__bad_interrupt>
+  be:	00 00       	nop
+  c0:	30 c0       	rjmp	.+96     	; 0x122 <__bad_interrupt>
+  c2:	00 00       	nop
+  c4:	2e c0       	rjmp	.+92     	; 0x122 <__bad_interrupt>
+  c6:	00 00       	nop
+  c8:	2c c0       	rjmp	.+88     	; 0x122 <__bad_interrupt>
+  ca:	00 00       	nop
+  cc:	2a c0       	rjmp	.+84     	; 0x122 <__bad_interrupt>
+  ce:	00 00       	nop
+  d0:	28 c0       	rjmp	.+80     	; 0x122 <__bad_interrupt>
+  d2:	00 00       	nop
+  d4:	26 c0       	rjmp	.+76     	; 0x122 <__bad_interrupt>
+  d6:	00 00       	nop
+  d8:	24 c0       	rjmp	.+72     	; 0x122 <__bad_interrupt>
+  da:	00 00       	nop
+  dc:	22 c0       	rjmp	.+68     	; 0x122 <__bad_interrupt>
+  de:	00 00       	nop
+  e0:	20 c0       	rjmp	.+64     	; 0x122 <__bad_interrupt>
+	...
+
+000000e4 <__ctors_end>:
+  e4:	11 24       	eor	r1, r1
+  e6:	1f be       	out	0x3f, r1	; 63
+  e8:	cf ef       	ldi	r28, 0xFF	; 255
+  ea:	d1 e2       	ldi	r29, 0x21	; 33
+  ec:	de bf       	out	0x3e, r29	; 62
+  ee:	cd bf       	out	0x3d, r28	; 61
+  f0:	00 e0       	ldi	r16, 0x00	; 0
+  f2:	0c bf       	out	0x3c, r16	; 60
+
+000000f4 <__do_copy_data>:
+  f4:	12 e0       	ldi	r17, 0x02	; 2
+  f6:	a0 e0       	ldi	r26, 0x00	; 0
+  f8:	b2 e0       	ldi	r27, 0x02	; 2
+  fa:	e4 ef       	ldi	r30, 0xF4	; 244
+  fc:	f2 e0       	ldi	r31, 0x02	; 2
+  fe:	00 e0       	ldi	r16, 0x00	; 0
+ 100:	0b bf       	out	0x3b, r16	; 59
+ 102:	02 c0       	rjmp	.+4      	; 0x108 <__do_copy_data+0x14>
+ 104:	07 90       	elpm	r0, Z+
+ 106:	0d 92       	st	X+, r0
+ 108:	aa 32       	cpi	r26, 0x2A	; 42
+ 10a:	b1 07       	cpc	r27, r17
+ 10c:	d9 f7       	brne	.-10     	; 0x104 <__do_copy_data+0x10>
+
+0000010e <__do_clear_bss>:
+ 10e:	22 e0       	ldi	r18, 0x02	; 2
+ 110:	aa e2       	ldi	r26, 0x2A	; 42
+ 112:	b2 e0       	ldi	r27, 0x02	; 2
+ 114:	01 c0       	rjmp	.+2      	; 0x118 <.do_clear_bss_start>
+
+00000116 <.do_clear_bss_loop>:
+ 116:	1d 92       	st	X+, r1
+
+00000118 <.do_clear_bss_start>:
+ 118:	a0 33       	cpi	r26, 0x30	; 48
+ 11a:	b2 07       	cpc	r27, r18
+ 11c:	e1 f7       	brne	.-8      	; 0x116 <.do_clear_bss_loop>
+ 11e:	02 d0       	rcall	.+4      	; 0x124 <main>
+ 120:	e7 c0       	rjmp	.+462    	; 0x2f0 <_exit>
+
+00000122 <__bad_interrupt>:
+ 122:	6e cf       	rjmp	.-292    	; 0x0 <__vectors>
+
+00000124 <main>:
+#include "MCP2515.h"
+#include "spi_control.h"
+
+
+int main ()
+{
+ 124:	cf 93       	push	r28
+ 126:	df 93       	push	r29
+ 128:	cd b7       	in	r28, 0x3d	; 61
+ 12a:	de b7       	in	r29, 0x3e	; 62
+ 12c:	2a 97       	sbiw	r28, 0x0a	; 10
+ 12e:	0f b6       	in	r0, 0x3f	; 63
+ 130:	f8 94       	cli
+ 132:	de bf       	out	0x3e, r29	; 62
+ 134:	0f be       	out	0x3f, r0	; 63
+ 136:	cd bf       	out	0x3d, r28	; 61
+can_init();
+ 138:	26 d0       	rcall	.+76     	; 0x186 <can_init>
+mcp2515_bit_modify(MCP_CANCTRL, 0xE0 , MODE_NORMAL);
+ 13a:	40 e0       	ldi	r20, 0x00	; 0
+ 13c:	60 ee       	ldi	r22, 0xE0	; 224
+ 13e:	8f e0       	ldi	r24, 0x0F	; 15
+ 140:	68 d0       	rcall	.+208    	; 0x212 <mcp2515_bit_modify>
+	
+	can_message_send(&msg1);
+	_delay_ms(40);
+	can_message_receive(&msg2);
+*/
+	DDRB = 0xff;
+ 142:	8f ef       	ldi	r24, 0xFF	; 255
+ 144:	84 b9       	out	0x04, r24	; 4
+
+		PORTB |= (1 << PB7);
+ 146:	2f 9a       	sbi	0x05, 7	; 5
+		can_message_t msg1 = {0xdf, 0x8, "00000000"};
+ 148:	8a e0       	ldi	r24, 0x0A	; 10
+ 14a:	e0 e0       	ldi	r30, 0x00	; 0
+ 14c:	f2 e0       	ldi	r31, 0x02	; 2
+ 14e:	de 01       	movw	r26, r28
+ 150:	11 96       	adiw	r26, 0x01	; 1
+ 152:	01 90       	ld	r0, Z+
+ 154:	0d 92       	st	X+, r0
+ 156:	8a 95       	dec	r24
+ 158:	e1 f7       	brne	.-8      	; 0x152 <main+0x2e>
+		can_message_send(&msg1);
+ 15a:	ce 01       	movw	r24, r28
+ 15c:	01 96       	adiw	r24, 0x01	; 1
+ 15e:	1d d0       	rcall	.+58     	; 0x19a <can_message_send>
+		msg1.data[0] = 'Ø';
+ 160:	88 ed       	ldi	r24, 0xD8	; 216
+ 162:	8b 83       	std	Y+3, r24	; 0x03
+		msg1.data[7]+= 1;
+ 164:	8a 85       	ldd	r24, Y+10	; 0x0a
+ 166:	8f 5f       	subi	r24, 0xFF	; 255
+ 168:	8a 87       	std	Y+10, r24	; 0x0a
+		can_message_send(&msg1);
+ 16a:	ce 01       	movw	r24, r28
+ 16c:	01 96       	adiw	r24, 0x01	; 1
+ 16e:	15 d0       	rcall	.+42     	; 0x19a <can_message_send>
+	
+
+}
+ 170:	80 e0       	ldi	r24, 0x00	; 0
+ 172:	90 e0       	ldi	r25, 0x00	; 0
+ 174:	2a 96       	adiw	r28, 0x0a	; 10
+ 176:	0f b6       	in	r0, 0x3f	; 63
+ 178:	f8 94       	cli
+ 17a:	de bf       	out	0x3e, r29	; 62
+ 17c:	0f be       	out	0x3f, r0	; 63
+ 17e:	cd bf       	out	0x3d, r28	; 61
+ 180:	df 91       	pop	r29
+ 182:	cf 91       	pop	r28
+ 184:	08 95       	ret
+
+00000186 <can_init>:
+#include "MCP2515.h"
+
+void can_init()
+{
+	
+	mcp2515_init();
+ 186:	6a d0       	rcall	.+212    	; 0x25c <mcp2515_init>
+	
+	// Set filter-masks to zero
+	mcp2515_bit_modify(MCP_RXF0SIDH, 0xff , 0x00);
+ 188:	40 e0       	ldi	r20, 0x00	; 0
+ 18a:	6f ef       	ldi	r22, 0xFF	; 255
+ 18c:	80 e0       	ldi	r24, 0x00	; 0
+ 18e:	41 d0       	rcall	.+130    	; 0x212 <mcp2515_bit_modify>
+	mcp2515_bit_modify(MCP_RXF0SIDL, 0xE0 , 0x00);
+ 190:	40 e0       	ldi	r20, 0x00	; 0
+ 192:	60 ee       	ldi	r22, 0xE0	; 224
+ 194:	81 e0       	ldi	r24, 0x01	; 1
+ 196:	3d c0       	rjmp	.+122    	; 0x212 <mcp2515_bit_modify>
+ 198:	08 95       	ret
+
+0000019a <can_message_send>:
+	
+}
+
+
+void can_message_send(can_message_t *message)
+{
+ 19a:	1f 93       	push	r17
+ 19c:	cf 93       	push	r28
+ 19e:	df 93       	push	r29
+ 1a0:	ec 01       	movw	r28, r24
+	char i;
+	
+	// ID
+	mcp2515_write(MCP_TXB0CTRL + 1,message->id);
+ 1a2:	68 81       	ld	r22, Y
+ 1a4:	81 e3       	ldi	r24, 0x31	; 49
+ 1a6:	1e d0       	rcall	.+60     	; 0x1e4 <mcp2515_write>
+	mcp2515_write(0x32,0x00);
+ 1a8:	60 e0       	ldi	r22, 0x00	; 0
+ 1aa:	82 e3       	ldi	r24, 0x32	; 50
+ 1ac:	1b d0       	rcall	.+54     	; 0x1e4 <mcp2515_write>
+	
+	//Length
+	mcp2515_write(MCP_TXB0CTRL + 5,message->length);
+ 1ae:	69 81       	ldd	r22, Y+1	; 0x01
+ 1b0:	85 e3       	ldi	r24, 0x35	; 53
+ 1b2:	18 d0       	rcall	.+48     	; 0x1e4 <mcp2515_write>
+	
+	// Data
+	for (i = 0; i< message->length; i++){
+ 1b4:	89 81       	ldd	r24, Y+1	; 0x01
+ 1b6:	18 16       	cp	r1, r24
+ 1b8:	74 f4       	brge	.+28     	; 0x1d6 <can_message_send+0x3c>
+ 1ba:	10 e0       	ldi	r17, 0x00	; 0
+		mcp2515_write(MCP_TXB0CTRL + 6 + i, *((message->data)+i) );
+ 1bc:	fe 01       	movw	r30, r28
+ 1be:	e1 0f       	add	r30, r17
+ 1c0:	f1 1d       	adc	r31, r1
+ 1c2:	17 fd       	sbrc	r17, 7
+ 1c4:	fa 95       	dec	r31
+ 1c6:	62 81       	ldd	r22, Z+2	; 0x02
+ 1c8:	86 e3       	ldi	r24, 0x36	; 54
+ 1ca:	81 0f       	add	r24, r17
+ 1cc:	0b d0       	rcall	.+22     	; 0x1e4 <mcp2515_write>
+	
+	//Length
+	mcp2515_write(MCP_TXB0CTRL + 5,message->length);
+	
+	// Data
+	for (i = 0; i< message->length; i++){
+ 1ce:	1f 5f       	subi	r17, 0xFF	; 255
+ 1d0:	89 81       	ldd	r24, Y+1	; 0x01
+ 1d2:	18 17       	cp	r17, r24
+ 1d4:	9c f3       	brlt	.-26     	; 0x1bc <can_message_send+0x22>
+		mcp2515_write(MCP_TXB0CTRL + 6 + i, *((message->data)+i) );
+	}
+	
+	mcp2515_request_to_send(MCP_RTS_TX0);
+ 1d6:	81 e8       	ldi	r24, 0x81	; 129
+ 1d8:	90 e0       	ldi	r25, 0x00	; 0
+ 1da:	13 d0       	rcall	.+38     	; 0x202 <mcp2515_request_to_send>
+}
+ 1dc:	df 91       	pop	r29
+ 1de:	cf 91       	pop	r28
+ 1e0:	1f 91       	pop	r17
+ 1e2:	08 95       	ret
+
+000001e4 <mcp2515_write>:
+	
+	return result;
+}
+
+void mcp2515_write(char addr, char data)
+{
+ 1e4:	cf 93       	push	r28
+ 1e6:	df 93       	push	r29
+ 1e8:	d8 2f       	mov	r29, r24
+ 1ea:	c6 2f       	mov	r28, r22
+	spi_select();
+ 1ec:	41 d0       	rcall	.+130    	; 0x270 <spi_select>
+	
+	spi_transmit(MCP_WRITE);
+ 1ee:	82 e0       	ldi	r24, 0x02	; 2
+ 1f0:	43 d0       	rcall	.+134    	; 0x278 <spi_transmit>
+	spi_transmit(addr);
+ 1f2:	8d 2f       	mov	r24, r29
+ 1f4:	41 d0       	rcall	.+130    	; 0x278 <spi_transmit>
+	spi_transmit(data);
+ 1f6:	8c 2f       	mov	r24, r28
+ 1f8:	3f d0       	rcall	.+126    	; 0x278 <spi_transmit>
+	
+	spi_deselect();
+ 1fa:	3c d0       	rcall	.+120    	; 0x274 <spi_deselect>
+	
+}
+ 1fc:	df 91       	pop	r29
+ 1fe:	cf 91       	pop	r28
+ 200:	08 95       	ret
+
+00000202 <mcp2515_request_to_send>:
+
+void mcp2515_request_to_send(int reg)
+{
+ 202:	cf 93       	push	r28
+ 204:	c8 2f       	mov	r28, r24
+	spi_select();
+ 206:	34 d0       	rcall	.+104    	; 0x270 <spi_select>
+	
+	spi_transmit(reg);
+ 208:	8c 2f       	mov	r24, r28
+ 20a:	36 d0       	rcall	.+108    	; 0x278 <spi_transmit>
+	
+	spi_deselect();
+ 20c:	33 d0       	rcall	.+102    	; 0x274 <spi_deselect>
+}
+ 20e:	cf 91       	pop	r28
+ 210:	08 95       	ret
+
+00000212 <mcp2515_bit_modify>:
+
+void mcp2515_bit_modify(char addr, char mask_byte, char data)
+{
+ 212:	1f 93       	push	r17
+ 214:	cf 93       	push	r28
+ 216:	df 93       	push	r29
+ 218:	18 2f       	mov	r17, r24
+ 21a:	d6 2f       	mov	r29, r22
+ 21c:	c4 2f       	mov	r28, r20
+	spi_select();
+ 21e:	28 d0       	rcall	.+80     	; 0x270 <spi_select>
+	
+	spi_transmit(MCP_BITMOD);
+ 220:	85 e0       	ldi	r24, 0x05	; 5
+ 222:	2a d0       	rcall	.+84     	; 0x278 <spi_transmit>
+	spi_transmit(addr);
+ 224:	81 2f       	mov	r24, r17
+ 226:	28 d0       	rcall	.+80     	; 0x278 <spi_transmit>
+	spi_transmit(mask_byte);
+ 228:	8d 2f       	mov	r24, r29
+ 22a:	26 d0       	rcall	.+76     	; 0x278 <spi_transmit>
+	spi_transmit(data);
+ 22c:	8c 2f       	mov	r24, r28
+ 22e:	24 d0       	rcall	.+72     	; 0x278 <spi_transmit>
+	
+	spi_deselect();
+ 230:	21 d0       	rcall	.+66     	; 0x274 <spi_deselect>
+}
+ 232:	df 91       	pop	r29
+ 234:	cf 91       	pop	r28
+ 236:	1f 91       	pop	r17
+ 238:	08 95       	ret
+
+0000023a <mcp2515_reset>:
+
+void mcp2515_reset()
+{
+	spi_select();
+ 23a:	1a d0       	rcall	.+52     	; 0x270 <spi_select>
+	
+	spi_transmit(MCP_RESET);
+ 23c:	80 ec       	ldi	r24, 0xC0	; 192
+ 23e:	1c d0       	rcall	.+56     	; 0x278 <spi_transmit>
+	
+	spi_deselect();
+ 240:	19 c0       	rjmp	.+50     	; 0x274 <spi_deselect>
+ 242:	08 95       	ret
+
+00000244 <mcp2515_read_status>:
+}
+
+char mcp2515_read_status()
+{
+ 244:	cf 93       	push	r28
+	char output;
+	spi_select();
+ 246:	14 d0       	rcall	.+40     	; 0x270 <spi_select>
+	spi_transmit(MCP_READ);
+ 248:	83 e0       	ldi	r24, 0x03	; 3
+ 24a:	16 d0       	rcall	.+44     	; 0x278 <spi_transmit>
+	spi_transmit(MCP_CANSTAT);
+ 24c:	8e e0       	ldi	r24, 0x0E	; 14
+ 24e:	14 d0       	rcall	.+40     	; 0x278 <spi_transmit>
+	output = spi_receive();
+ 250:	18 d0       	rcall	.+48     	; 0x282 <spi_receive>
+ 252:	c8 2f       	mov	r28, r24
+	
+	spi_deselect();
+ 254:	0f d0       	rcall	.+30     	; 0x274 <spi_deselect>
+	return output;
+}
+ 256:	8c 2f       	mov	r24, r28
+ 258:	cf 91       	pop	r28
+ 25a:	08 95       	ret
+
+0000025c <mcp2515_init>:
+#include "spi_control.h"
+#include <stdio.h>
+
+void mcp2515_init(){
+	char status;
+	spi_init();
+ 25c:	16 d0       	rcall	.+44     	; 0x28a <spi_init>
+	mcp2515_reset();
+ 25e:	ed df       	rcall	.-38     	; 0x23a <mcp2515_reset>
+	
+	status = mcp2515_read_status();
+ 260:	f1 df       	rcall	.-30     	; 0x244 <mcp2515_read_status>
+	if ((status & MODE_MASK) != MODE_CONFIG)
+ 262:	80 7e       	andi	r24, 0xE0	; 224
+ 264:	80 38       	cpi	r24, 0x80	; 128
+ 266:	19 f0       	breq	.+6      	; 0x26e <mcp2515_init+0x12>
+	{
+		printf("MCP2515 is not in config mode!\n");
+ 268:	8a e0       	ldi	r24, 0x0A	; 10
+ 26a:	92 e0       	ldi	r25, 0x02	; 2
+ 26c:	14 c0       	rjmp	.+40     	; 0x296 <puts>
+ 26e:	08 95       	ret
+
+00000270 <spi_select>:
+#include "spi_control.h"
+#include <stdio.h>
+
+void spi_select()
+{
+	PORTB &= ~(1<<PB0);
+ 270:	28 98       	cbi	0x05, 0	; 5
+ 272:	08 95       	ret
+
+00000274 <spi_deselect>:
+}
+
+void spi_deselect()
+{
+	PORTB |= (1<<PB0);
+ 274:	28 9a       	sbi	0x05, 0	; 5
+ 276:	08 95       	ret
+
+00000278 <spi_transmit>:
+
+
+void spi_transmit(char cData)
+{
+	/* Start transmission */
+	SPDR = cData;
+ 278:	8e bd       	out	0x2e, r24	; 46
+	
+	/* Wait for transmission complete */
+	while(!(SPSR & (1<<SPIF)))
+ 27a:	0d b4       	in	r0, 0x2d	; 45
+ 27c:	07 fe       	sbrs	r0, 7
+ 27e:	fd cf       	rjmp	.-6      	; 0x27a <spi_transmit+0x2>
+	;
+}
+ 280:	08 95       	ret
+
+00000282 <spi_receive>:
+	PORTB |= (1<<PB0);
+}
+
+char spi_receive()
+{
+	spi_transmit(0);
+ 282:	80 e0       	ldi	r24, 0x00	; 0
+ 284:	f9 df       	rcall	.-14     	; 0x278 <spi_transmit>
+	return SPDR;
+ 286:	8e b5       	in	r24, 0x2e	; 46
+}
+ 288:	08 95       	ret
+
+0000028a <spi_init>:
+}
+
+
+void spi_init(){
+	/* Set MOSI,SCK and SS output, all others input */
+	DDR_SPI |= (1<<DD_MOSI) | (1<<DD_SCK) | (1<<DD_SS);    
+ 28a:	84 b1       	in	r24, 0x04	; 4
+ 28c:	87 60       	ori	r24, 0x07	; 7
+ 28e:	84 b9       	out	0x04, r24	; 4
+	
+	/* Enable SPI, Master, set clock rate fck/16 */
+	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
+ 290:	81 e5       	ldi	r24, 0x51	; 81
+ 292:	8c bd       	out	0x2c, r24	; 44
+ 294:	08 95       	ret
+
+00000296 <puts>:
+ 296:	0f 93       	push	r16
+ 298:	1f 93       	push	r17
+ 29a:	cf 93       	push	r28
+ 29c:	df 93       	push	r29
+ 29e:	e0 91 2c 02 	lds	r30, 0x022C
+ 2a2:	f0 91 2d 02 	lds	r31, 0x022D
+ 2a6:	23 81       	ldd	r18, Z+3	; 0x03
+ 2a8:	21 ff       	sbrs	r18, 1
+ 2aa:	1b c0       	rjmp	.+54     	; 0x2e2 <puts+0x4c>
+ 2ac:	ec 01       	movw	r28, r24
+ 2ae:	00 e0       	ldi	r16, 0x00	; 0
+ 2b0:	10 e0       	ldi	r17, 0x00	; 0
+ 2b2:	89 91       	ld	r24, Y+
+ 2b4:	60 91 2c 02 	lds	r22, 0x022C
+ 2b8:	70 91 2d 02 	lds	r23, 0x022D
+ 2bc:	db 01       	movw	r26, r22
+ 2be:	18 96       	adiw	r26, 0x08	; 8
+ 2c0:	ed 91       	ld	r30, X+
+ 2c2:	fc 91       	ld	r31, X
+ 2c4:	19 97       	sbiw	r26, 0x09	; 9
+ 2c6:	88 23       	and	r24, r24
+ 2c8:	31 f0       	breq	.+12     	; 0x2d6 <puts+0x40>
+ 2ca:	19 95       	eicall
+ 2cc:	89 2b       	or	r24, r25
+ 2ce:	89 f3       	breq	.-30     	; 0x2b2 <puts+0x1c>
+ 2d0:	0f ef       	ldi	r16, 0xFF	; 255
+ 2d2:	1f ef       	ldi	r17, 0xFF	; 255
+ 2d4:	ee cf       	rjmp	.-36     	; 0x2b2 <puts+0x1c>
+ 2d6:	8a e0       	ldi	r24, 0x0A	; 10
+ 2d8:	19 95       	eicall
+ 2da:	89 2b       	or	r24, r25
+ 2dc:	11 f4       	brne	.+4      	; 0x2e2 <puts+0x4c>
+ 2de:	c8 01       	movw	r24, r16
+ 2e0:	02 c0       	rjmp	.+4      	; 0x2e6 <puts+0x50>
+ 2e2:	8f ef       	ldi	r24, 0xFF	; 255
+ 2e4:	9f ef       	ldi	r25, 0xFF	; 255
+ 2e6:	df 91       	pop	r29
+ 2e8:	cf 91       	pop	r28
+ 2ea:	1f 91       	pop	r17
+ 2ec:	0f 91       	pop	r16
+ 2ee:	08 95       	ret
+
+000002f0 <_exit>:
+ 2f0:	f8 94       	cli
+
+000002f2 <__stop_program>:
+ 2f2:	ff cf       	rjmp	.-2      	; 0x2f2 <__stop_program>
