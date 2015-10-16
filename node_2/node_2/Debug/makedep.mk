@@ -4,6 +4,8 @@
 
 main.c
 
+servo.c
+
 src\can_com.c
 
 src\MCP2515.c

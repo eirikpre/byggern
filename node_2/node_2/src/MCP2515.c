@@ -13,6 +13,7 @@ void mcp2515_init(){
 		printf("MCP2515 is not in config mode!\n");
 	}
 	
+	
 }
 char mcp2515_read (char addr){
 	char result;

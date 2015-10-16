@@ -1,5 +1,5 @@
 #include "can_com.h"
-
+#include <stdio.h>
 #include "MCP2515.h"
 
 void can_init()
@@ -71,4 +71,32 @@ int can_get_message(can_message_t* message)
 		return 0;
 	}
 	
+}
+
+void can_handle_message(can_message_t* message)
+{
+	switch (message->id)
+	{
+		case 'p' :				// Print
+			can_print(message);
+			break;	
+		default:
+								//do nothing 
+			break;
+	}
+	
+	
+	
+}
+
+
+void can_print(can_message_t* msg)
+{
+	printf("ID: %c ,Length: %d, ",msg->id,msg->length);
+	int i ;
+	for (i=0; i<8;i++)
+	{
+		printf("%c", msg->data[i]);
+	}
+	printf("\n");
 }

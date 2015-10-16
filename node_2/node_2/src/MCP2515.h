@@ -15,13 +15,13 @@ v1.00       2003/12/11  Initial release
 Copyright 2003 Kimberly Otten Software Consulting
 */
 
-void mcp2515_init();
+void mcp2515_init(void);
 char mcp2515_read (char addr);
 void mcp2515_write(char addr, char data);
 void mcp2515_request_to_send(int reg);
 void mcp2515_bit_modify(char addr, char mask_byte, char data);
-void mcp2515_reset();
-char mcp2515_read_status();
+void mcp2515_reset(void);
+char mcp2515_read_status(void);
 
 // Define MCP2515 register addresses
 

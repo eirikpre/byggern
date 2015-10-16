@@ -6,32 +6,18 @@
 #include "spi_control.h"
 #include "util/delay.h"
 #include "MCP2515.h"
-
+#include "can_com.h"
 
 void update_next(direction dir);
 void menu_fsm();
 void menu_handler(direction* curr_dir, direction* last_dir);
-
+void menu_print(menu_t* object);
 
 menu_t* current;
 int next;
 menu_t menu;
 
 
-void menu_print(menu_t* object){
-	oled_clear_all();
-	oled_goto(0,0);
-	oled_print(object->name);
-	oled_goto(next,0);
-	oled_print("-");
-	
-	int i;
-	for (i=1;i<object->number_children+1;i++)
-	{
-		oled_goto(i,8);
-		oled_print((object->children[i-1])->name);
-	}
-}
 
 void menu_init(){
 	
@@ -63,35 +49,29 @@ void menu_init(){
 void menu_fsm(){
 	direction curr_dir;
 	direction last_dir = NEUTRAL;
-	while(1){
+	joy_position_t joystick;
+	
+	// Testing
+	can_message_t message = {'j',8,"joystick"};
+	can_message_send(&message);
+	
+	while(1)
+	{
 		menu_handler(&curr_dir, &last_dir);
 		
+		/*        TESTING     */
+		joystick = get_position();
+		message.data[0] = joystick.x_pos;
+		message.data[1] = joystick.y_pos;
+		can_message_send(&message);
 		
 		
+		
+		_delay_ms(10);
 	}
 }
 
-void update_next(direction dir){
-	if (dir == DOWN) {
-		if (next+1 <= current->number_children){
-			oled_goto(next,0);
-			oled_print(" ");
-			next++;
-			oled_goto(next,0);
-			oled_print("-");
-		}
-		
-	}
-	else{
-		if (next > 1){
-			oled_goto(next,0);
-			oled_print(" ");
-			next--;
-			oled_goto(next,0);
-			oled_print("-");
-		}
-	}	
-}
+
 
 void menu_handler(direction* curr_dir, direction* last_dir)
 {
@@ -107,8 +87,7 @@ void menu_handler(direction* curr_dir, direction* last_dir)
 			
 			if (next == 3)
 			{
-				current = menu.children[next-1];
-				
+				current = current->children[next-1];
 				next = 1;
 				menu_print(current);
 			}
@@ -134,4 +113,42 @@ void menu_handler(direction* curr_dir, direction* last_dir)
 		}
 	}
 	*last_dir = *curr_dir;
+}
+
+
+void update_next(direction dir){
+	if (dir == DOWN) {
+		if (next+1 <= current->number_children){
+			oled_goto(next,0);
+			oled_print(" ");
+			next++;
+			oled_goto(next,0);
+			oled_print("-");
+		}
+		
+	}
+	else{
+		if (next > 1){
+			oled_goto(next,0);
+			oled_print(" ");
+			next--;
+			oled_goto(next,0);
+			oled_print("-");
+		}
+	}
+}
+
+void menu_print(menu_t* object){
+	oled_clear_all();
+	oled_goto(0,0);
+	oled_print(object->name);
+	oled_goto(next,0);
+	oled_print("-");
+	
+	int i;
+	for (i=1;i<object->number_children+1;i++)
+	{
+		oled_goto(i,8);
+		oled_print((object->children[i-1])->name);
+	}
 }

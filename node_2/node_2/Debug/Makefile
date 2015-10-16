@@ -39,6 +39,7 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../main.c \
+../servo.c \
 ../src/can_com.c \
 ../src/MCP2515.c \
 ../src/spi_control.c
@@ -52,24 +53,28 @@ ASM_SRCS +=
 
 OBJS +=  \
 main.o \
+servo.o \
 src/can_com.o \
 src/MCP2515.o \
 src/spi_control.o
 
 OBJS_AS_ARGS +=  \
 main.o \
+servo.o \
 src/can_com.o \
 src/MCP2515.o \
 src/spi_control.o
 
 C_DEPS +=  \
 main.d \
+servo.d \
 src/can_com.d \
 src/MCP2515.d \
 src/spi_control.d
 
 C_DEPS_AS_ARGS +=  \
 main.d \
+servo.d \
 src/can_com.d \
 src/MCP2515.d \
 src/spi_control.d
@@ -88,6 +93,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

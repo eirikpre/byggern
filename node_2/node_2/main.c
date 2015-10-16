@@ -6,32 +6,39 @@
 #include <stdio.h>
 #include <util/delay.h>
 
+#include "servo.h"
 #include "can_com.h"
 #include "MCP2515.h"
 #include "spi_control.h"
 
 
-int main ()
+int main (void)
 {
-can_init();
-mcp2515_bit_modify(MCP_CANCTRL, 0xE0 , MODE_NORMAL);
-/*	
-	mcp2515_bit_modify(MCP_CANCTRL, 0xE0 , MODE_LOOPBACK);
-	can_message_t msg1 = {'f', 0x8, "hallo123"};
-	can_message_t msg2;
-	
-	can_message_send(&msg1);
-	_delay_ms(40);
-	can_message_receive(&msg2);
-*/
-	DDRB = 0xff;
+	can_init();
+	servo_init();
 
-		PORTB |= (1 << PB7);
-		can_message_t msg1 = {0xdf, 0x8, "00000000"};
-		can_message_send(&msg1);
-		msg1.data[0] = 'Ø';
-		msg1.data[7]+= 1;
-		can_message_send(&msg1);
+	float val = 950;
 	
+	DDRB = 0xff;
+	PORTB |= (1 << PB7);
+	
+	can_message_t msg;
+	
+	while (1)
+	{
+
+		
+		if (val > 2050){
+			val = 950;
+		}
+		
+		servo_write(val);
+		
+		_delay_ms(5);
+		
+		can_get_message(&msg);
+		val = msg.data[0]*5 + 1500;
+	}
+
 
 }
