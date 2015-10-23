@@ -187,10 +187,22 @@
     <Compile Include="servo.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\ADC.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ADC.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\can_com.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\can_com.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ir.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ir.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\MCP2515.c">

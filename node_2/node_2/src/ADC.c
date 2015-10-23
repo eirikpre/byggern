@@ -14,6 +14,6 @@ char ADC_read2(){
 	while (ADCSRA & (1 << ADSC) == (1 << ADSC)) {
 		//Delay?
 	}
-	return *ADCL;
+	return ADCL;
 }
 

@@ -6,7 +6,11 @@ main.c
 
 servo.c
 
+src\ADC.c
+
 src\can_com.c
+
+src\ir.c
 
 src\MCP2515.c
 

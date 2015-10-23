@@ -53,7 +53,7 @@ void menu_fsm(){
 	
 	// Testing
 	can_message_t message = {'j',8,"joystick"};
-	can_message_send(&message);
+	//can_message_send(&message);
 	
 	while(1)
 	{
@@ -63,7 +63,9 @@ void menu_fsm(){
 		joystick = get_position();
 		message.data[0] = joystick.x_pos;
 		message.data[1] = joystick.y_pos;
-		can_message_send(&message);
+		//can_message_send(&message);
+		can_message_receive(&message, 8);
+		can_print(&message);
 		
 		
 		

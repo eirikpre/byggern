@@ -40,7 +40,9 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../main.c \
 ../servo.c \
+../src/ADC.c \
 ../src/can_com.c \
+../src/ir.c \
 ../src/MCP2515.c \
 ../src/spi_control.c
 
@@ -54,28 +56,36 @@ ASM_SRCS +=
 OBJS +=  \
 main.o \
 servo.o \
+src/ADC.o \
 src/can_com.o \
+src/ir.o \
 src/MCP2515.o \
 src/spi_control.o
 
 OBJS_AS_ARGS +=  \
 main.o \
 servo.o \
+src/ADC.o \
 src/can_com.o \
+src/ir.o \
 src/MCP2515.o \
 src/spi_control.o
 
 C_DEPS +=  \
 main.d \
 servo.d \
+src/ADC.d \
 src/can_com.d \
+src/ir.d \
 src/MCP2515.d \
 src/spi_control.d
 
 C_DEPS_AS_ARGS +=  \
 main.d \
 servo.d \
+src/ADC.d \
 src/can_com.d \
+src/ir.d \
 src/MCP2515.d \
 src/spi_control.d
 
@@ -93,6 +103,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 
