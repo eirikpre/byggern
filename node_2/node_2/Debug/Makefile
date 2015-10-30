@@ -42,9 +42,9 @@ C_SRCS +=  \
 ../servo.c \
 ../src/ADC.c \
 ../src/can_com.c \
-../src/ir.c \
 ../src/MCP2515.c \
-../src/spi_control.c
+../src/spi_control.c \
+../TWI_Master.c
 
 
 PREPROCESSING_SRCS += 
@@ -58,36 +58,36 @@ main.o \
 servo.o \
 src/ADC.o \
 src/can_com.o \
-src/ir.o \
 src/MCP2515.o \
-src/spi_control.o
+src/spi_control.o \
+TWI_Master.o
 
 OBJS_AS_ARGS +=  \
 main.o \
 servo.o \
 src/ADC.o \
 src/can_com.o \
-src/ir.o \
 src/MCP2515.o \
-src/spi_control.o
+src/spi_control.o \
+TWI_Master.o
 
 C_DEPS +=  \
 main.d \
 servo.d \
 src/ADC.d \
 src/can_com.d \
-src/ir.d \
 src/MCP2515.d \
-src/spi_control.d
+src/spi_control.d \
+TWI_Master.d
 
 C_DEPS_AS_ARGS +=  \
 main.d \
 servo.d \
 src/ADC.d \
 src/can_com.d \
-src/ir.d \
 src/MCP2515.d \
-src/spi_control.d
+src/spi_control.d \
+TWI_Master.d
 
 OUTPUT_FILE_PATH +=node_2.elf
 

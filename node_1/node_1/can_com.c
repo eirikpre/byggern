@@ -81,7 +81,7 @@ void can_handle_message(can_message_t* message)
 			can_print(message);
 			break;	
 		default:
-								//do nothing 
+			can_print(message);					//do nothing 
 			break;
 	}
 	
@@ -94,9 +94,9 @@ void can_print(can_message_t* msg)
 {
 	printf("ID: %c ,Length: %d, ",msg->id,msg->length);
 	int i ;
-	for (i=0; i<8;i++)
+	for (i=0; i<msg->length;i++)
 	{
-		printf("%c", msg->data[i]);
+		printf("%i", msg->data[i]);
 	}
 	printf("\n");
 }

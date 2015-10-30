@@ -199,12 +199,6 @@
     <Compile Include="src\can_com.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\ir.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ir.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\MCP2515.c">
       <SubType>compile</SubType>
     </Compile>
@@ -215,6 +209,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\spi_control.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TWI_Master.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TWI_Master.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

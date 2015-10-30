@@ -15,27 +15,22 @@ void menu_print(menu_t* object);
 
 menu_t* current;
 int next;
-menu_t menu;
-
-
+menu_t sub3sub1 = {"Calibrate",0,NULL,NULL,{}};
+menu_t sub1 = {"Play game",0,NULL,NULL,{}};
+menu_t sub2 = {"Highscores",0,NULL,NULL,{}};
+menu_t sub3 = {"Settings",1,NULL,NULL, {&sub3sub1}	};
+menu_t sub4 = {"Debug",0,NULL ,NULL,{}};
+menu_t menu = {"Main Menu",4,NULL,NULL,{&sub1,&sub2,&sub3,&sub4}};
 
 void menu_init(){
-	
-	menu_t sub3sub1 = {"Calibrate",0,NULL,NULL,{}};
-	
-	menu_t sub1 = {"Play game",0,NULL,NULL,{}};
-	menu_t sub2 = {"Highscores",0,NULL,NULL,{}};
-	menu_t sub3 = {"Settings",1,NULL,NULL, {&sub3sub1}	};
-	menu_t sub4 = {"Debug",0,NULL ,NULL,{}};
-	
-	
-	menu_t main_menu = {"Main Menu",4,NULL,NULL,{&sub1,&sub2,&sub3,&sub4}};
-	sub1.parent =&main_menu;	
-	sub2.parent =&main_menu;
-	sub3.parent =&main_menu;
+
 	sub3sub1.parent= &sub3;
+	sub1.parent = &menu;	
+	sub2.parent = &menu;
+	sub3.parent = &menu;
 	
-	menu = main_menu;
+	
+	
 	current = &menu;
 	next = 1;
 	
@@ -60,12 +55,15 @@ void menu_fsm(){
 		menu_handler(&curr_dir, &last_dir);
 		
 		/*        TESTING     */
-		joystick = get_position();
-		message.data[0] = joystick.x_pos;
-		message.data[1] = joystick.y_pos;
+		//joystick = get_position();
+		//message.data[0] = joystick.x_pos;
+		//message.data[1] = joystick.y_pos;
 		//can_message_send(&message);
-		can_message_receive(&message, 8);
-		can_print(&message);
+		if (can_get_message(&message) == 1)
+		{
+			can_handle_message(&message);
+		}
+		
 		
 		
 		

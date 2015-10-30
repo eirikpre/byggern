@@ -5,12 +5,17 @@
 #include <string.h>
 #include <stdio.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 
 #include "servo.h"
 #include "can_com.h"
 #include "MCP2515.h"
 #include "spi_control.h"
-#include "ADC.h"
+#include "src\ADC.h"
+#include "TWI_Master.h"
+
+
+
 
 
 int main (void)
@@ -18,21 +23,28 @@ int main (void)
 	can_init();
 	servo_init();
 	init_ADC();
-
-	float val = 950;
+	
+	TWSR |= 0x02; // Prescaling TWI clock
+	TWI_Master_Initialise();
+	sei();
 	
 	DDRB = 0xff;
-	PORTB |= (1 << PB7);
+	PORTB |= (1 << PB7); // LED
 	
-	can_message_t msg;
-	can_message_t msg2;
+	unsigned char test[3] = {0x50,0x00,100};
+
 	
+
 	while (1)
 	{
-		msg2.id = 'p';
-		msg2.data[0] = ADC_read2();
-		can_message_send(&msg2);
-		_delay_ms(5);
+		
+		/*    TESTING    */
+
+		check_and_report_goal();
+		TWI_Start_Transceiver_With_Data(test,3);
+
+		_delay_ms(10);
+		
 		/*
 		if (val > 2050){
 			val = 950;
@@ -46,6 +58,6 @@ int main (void)
 		val = msg.data[0]*5 + 1500;
 		*/
 	}
-
+	
 
 }
