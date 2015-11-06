@@ -60,12 +60,12 @@ int can_get_message(can_message_t* message)
 		mcp2515_bit_modify(MCP_CANINTF,0x01,0x00);
 		return 1;
 	}
-	else if ((mcp2515_read(MCP_CANINTF) & 0x02) == 0x02)
+	/*else if ((mcp2515_read(MCP_CANINTF) & 0x02) == 0x02)
 	{
 		can_message_receive(message,1);
 		mcp2515_bit_modify(MCP_CANINTF,0x02,0x00);
 		return 1;
-	}
+	}*/
 	else
 	{
 		return 0;
@@ -80,6 +80,12 @@ void can_handle_message(can_message_t* message)
 		case 'p' :				// Print
 			can_print(message);
 			break;	
+		case 'j' : 
+			can_print(message);
+			break;
+		case 'g' :
+			add_goal();
+			break;
 		default:
 			can_print(message);					//do nothing 
 			break;
@@ -94,9 +100,9 @@ void can_print(can_message_t* msg)
 {
 	printf("ID: %c ,Length: %d, ",msg->id,msg->length);
 	int i ;
-	for (i=0; i<msg->length;i++)
+	for (i = 0; i < 8 ; i++) //msg->length
 	{
-		printf("%i", msg->data[i]);
+		printf("%c", msg->data[i]);
 	}
 	printf("\n");
 }

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "MCP2515.h"
 
+
 void can_init()
 {
 	
@@ -16,7 +17,7 @@ void can_init()
 
 void can_message_send(can_message_t *message)
 {
-	char i;
+	int i;
 	
 	// ID
 	mcp2515_write(MCP_TXB0CTRL + 1,message->id);
@@ -27,7 +28,7 @@ void can_message_send(can_message_t *message)
 	
 	// Data
 	for (i = 0; i< message->length; i++){
-		mcp2515_write(MCP_TXB0CTRL + 6 + i, *((message->data)+i) );
+		mcp2515_write(MCP_TXB0CTRL + 6 + i, (message->data[i]) );
 	}
 	
 	mcp2515_request_to_send(MCP_RTS_TX0);
@@ -73,23 +74,6 @@ int can_get_message(can_message_t* message)
 	
 }
 
-void can_handle_message(can_message_t* message)
-{
-	switch (message->id)
-	{
-		case 'p' :				// Print
-			can_print(message);
-		break;
-		case 'j' :				// Joystick --> Reflect
-			message->id = 'p';
-			can_message_send(message);
-		default:
-		//do nothing
-
-		break;
-	}
-}
-
 
 void can_print(can_message_t* msg)
 {
@@ -97,7 +81,7 @@ void can_print(can_message_t* msg)
 	int i ;
 	for (i=0; i<msg->length;i++)
 	{
-		printf("%c", msg->data[i]);
+		printf("%i", msg->data[i]);
 	}
 	printf("\n");
 }

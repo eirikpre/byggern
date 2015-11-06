@@ -39,12 +39,14 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../main.c \
+../motor.c \
 ../servo.c \
 ../src/ADC.c \
 ../src/can_com.c \
 ../src/MCP2515.c \
 ../src/spi_control.c \
-../TWI_Master.c
+../i2c.c \
+../USART_driver.c
 
 
 PREPROCESSING_SRCS += 
@@ -55,39 +57,47 @@ ASM_SRCS +=
 
 OBJS +=  \
 main.o \
+motor.o \
 servo.o \
 src/ADC.o \
 src/can_com.o \
 src/MCP2515.o \
 src/spi_control.o \
-TWI_Master.o
+i2c.o \
+USART_driver.o
 
 OBJS_AS_ARGS +=  \
 main.o \
+motor.o \
 servo.o \
 src/ADC.o \
 src/can_com.o \
 src/MCP2515.o \
 src/spi_control.o \
-TWI_Master.o
+i2c.o \
+USART_driver.o
 
 C_DEPS +=  \
 main.d \
+motor.d \
 servo.d \
 src/ADC.d \
 src/can_com.d \
 src/MCP2515.d \
 src/spi_control.d \
-TWI_Master.d
+i2c.d \
+USART_driver.d
 
 C_DEPS_AS_ARGS +=  \
 main.d \
+motor.d \
 servo.d \
 src/ADC.d \
 src/can_com.d \
 src/MCP2515.d \
 src/spi_control.d \
-TWI_Master.d
+i2c.d \
+USART_driver.d
 
 OUTPUT_FILE_PATH +=node_2.elf
 
@@ -103,6 +113,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

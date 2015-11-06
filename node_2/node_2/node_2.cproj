@@ -181,6 +181,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="motor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="servo.c">
       <SubType>compile</SubType>
     </Compile>
@@ -211,10 +217,16 @@
     <Compile Include="src\spi_control.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="TWI_Master.c">
+    <Compile Include="i2c.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="TWI_Master.h">
+    <Compile Include="i2c.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="USART_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="USART_driver.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

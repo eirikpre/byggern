@@ -4,6 +4,8 @@
 
 main.c
 
+motor.c
+
 servo.c
 
 src\ADC.c
@@ -14,5 +16,7 @@ src\MCP2515.c
 
 src\spi_control.c
 
-TWI_Master.c
+i2c.c
+
+USART_driver.c
 

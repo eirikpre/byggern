@@ -12,52 +12,66 @@
 #include "MCP2515.h"
 #include "spi_control.h"
 #include "src\ADC.h"
-#include "TWI_Master.h"
+#include "USART_driver.h"
+#include "motor.h"
 
+can_message_t message;
 
-
-
+void handle_message(can_message_t* message);
 
 int main (void)
 {
 	can_init();
 	servo_init();
 	init_ADC();
-	
-	TWSR |= 0x02; // Prescaling TWI clock
-	TWI_Master_Initialise();
-	sei();
-	
-	DDRB = 0xff;
-	PORTB |= (1 << PB7); // LED
-	
-	unsigned char test[3] = {0x50,0x00,100};
-
+	USART_init(MYUBRR);
+	motor_init();
 	
 
+	DDRF = 0xFF; // MJ1 output
+	
 	while (1)
 	{
+
 		
+		_delay_ms(20);
 		/*    TESTING    */
-
-		check_and_report_goal();
-		TWI_Start_Transceiver_With_Data(test,3);
-
-		_delay_ms(10);
-		
-		/*
-		if (val > 2050){
-			val = 950;
+		if (can_get_message(&message) == 1)
+		{
+			handle_message(&message);
 		}
 		
-		servo_write(val);
+		check_and_report_goal();
 		
-		_delay_ms(5);
+		//TWI_Start_Transceiver_With_Data(test,3);
+	
+		//_delay_ms(10);
 		
+		/*
 		can_get_message(&msg);
 		val = msg.data[0]*5 + 1500;
+		servo_write(val);
 		*/
 	}
 	
 
 }
+
+
+void handle_message(can_message_t* message)
+{
+	switch (message->id)
+	{
+		case 'p' :				// Print
+		can_print(message);
+		break;
+		case 'j' :
+		motor_drive(message->data[0]);
+		break;
+		default:
+		can_print(message);
+
+		break;
+	}
+}
+

@@ -47,24 +47,31 @@ void menu_fsm(){
 	joy_position_t joystick;
 	
 	// Testing
-	can_message_t message = {'j',8,"joystick"};
-	//can_message_send(&message);
+	can_message_t joystick_msg = {'j',1,"joystick"};
 	
 	while(1)
 	{
+		// Menu
 		menu_handler(&curr_dir, &last_dir);
 		
-		/*        TESTING     */
-		//joystick = get_position();
-		//message.data[0] = joystick.x_pos;
-		//message.data[1] = joystick.y_pos;
-		//can_message_send(&message);
+		//Joystick
+		joystick_msg.data[0] = get_position().x_pos;
+		can_message_send(&joystick_msg);
+		
+		// Handle potential goals
 		if (can_get_message(&message) == 1)
 		{
 			can_handle_message(&message);
 		}
 		
+		/*        TESTING     */
+
+		//message.data[1] = joystick.y_pos;
 		
+		
+		
+		
+	
 		
 		
 		_delay_ms(10);

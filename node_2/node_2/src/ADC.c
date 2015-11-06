@@ -6,7 +6,7 @@
 int recent_goal = 0;
 int recent_goal_counter = 0;
 
-can_message_t goal_msg = {'g',1};
+can_message_t goal_msg = {'g',1,"aaaaaaaa"};
 
 void init_ADC(){
 	DDRF &= ~(1 << PF0);
@@ -30,15 +30,16 @@ uint8_t ADC_read(){
 
 void check_and_report_goal( void ){
 	
-	int threshold = 20;
+	int threshold = 40;
 	
 	if (recent_goal == 0)
 	{
 		goal_msg.data[0] = ADC_read();
+		
 		if(goal_msg.data[0] < threshold){
 			recent_goal = 1;
-			
 			can_message_send(&goal_msg);
+			
 			
 		}
 
