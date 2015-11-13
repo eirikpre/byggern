@@ -15,6 +15,9 @@
 #include "USART_driver.h"
 #include "motor.h"
 
+
+void solenoid_shoot(void);
+void init_solenoid(void);
 can_message_t message;
 
 void handle_message(can_message_t* message);
@@ -26,10 +29,11 @@ int main (void)
 	init_ADC();
 	USART_init(MYUBRR);
 	motor_init();
-	
+	init_solenoid();
 
 	DDRF = 0xFF; // MJ1 output
 	
+
 	while (1)
 	{
 
@@ -40,18 +44,8 @@ int main (void)
 		{
 			handle_message(&message);
 		}
-		
 		check_and_report_goal();
 		
-		//TWI_Start_Transceiver_With_Data(test,3);
-	
-		//_delay_ms(10);
-		
-		/*
-		can_get_message(&msg);
-		val = msg.data[0]*5 + 1500;
-		servo_write(val);
-		*/
 	}
 	
 
@@ -63,15 +57,31 @@ void handle_message(can_message_t* message)
 	switch (message->id)
 	{
 		case 'p' :				// Print
-		can_print(message);
-		break;
+			can_print(message);
+			break;
 		case 'j' :
-		motor_drive(message->data[0]);
-		break;
+			motor_drive( message->data[0] );				//	X - value
+			servo_write( message->data[1] * 5.0 + 1450 );	//	Y - value
+			break;
+		case 's' :
+			solenoid_shoot();
+			
+		
 		default:
-		can_print(message);
-
-		break;
+			can_print(message);
+			break;
 	}
 }
 
+void init_solenoid(void)
+{
+	DDRB |= (1 << PB4);
+	PORTB |= (1 << PB4);
+}
+
+void solenoid_shoot(void)
+{
+	PORTB &= ~(1 << PB4);
+	_delay_ms(75);
+	PORTB |= (1 << PB4);
+}

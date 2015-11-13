@@ -14,9 +14,6 @@ typedef struct menu_t
 }menu_t;
 
 
-
-
-
 void menu_print(menu_t* object);
 void menu_init();
 

@@ -38,6 +38,7 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../ADC.c \
+../game.c \
 ../main.c \
 ../can_com.c \
 ../MCP2515.c \
@@ -57,6 +58,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 ADC.o \
+game.o \
 main.o \
 can_com.o \
 MCP2515.o \
@@ -69,6 +71,7 @@ USART_driver.o
 
 OBJS_AS_ARGS +=  \
 ADC.o \
+game.o \
 main.o \
 can_com.o \
 MCP2515.o \
@@ -81,6 +84,7 @@ USART_driver.o
 
 C_DEPS +=  \
 ADC.d \
+game.d \
 main.d \
 can_com.d \
 MCP2515.d \
@@ -93,6 +97,7 @@ USART_driver.d
 
 C_DEPS_AS_ARGS +=  \
 ADC.d \
+game.d \
 main.d \
 can_com.d \
 MCP2515.d \
@@ -117,6 +122,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

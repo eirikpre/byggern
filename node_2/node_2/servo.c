@@ -29,8 +29,8 @@ void servo_init(void)
 	OCR1A = us_to_compare(900);
 	
 	// Enable output
-	DDRB |= (1 << PB6);
-	
+	DDRB |= (1 << PB5);
+
 }
 
 int us_to_compare(float us)
@@ -39,15 +39,12 @@ int us_to_compare(float us)
 }
 
 
-
-
 void servo_write(float val)
 {
-	if(val > 950.0 && val < 2050.0)
+	if(val > 900.0 && val < 2050.0)
 	{
 		OCR1A = us_to_compare(val);
 	}
-	
 }
 
 

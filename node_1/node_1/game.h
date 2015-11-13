@@ -1,7 +1,8 @@
+#ifndef GAME_H_
+#define GAME_H_
 
-/*
- * goal.h
- *
- * Created: 06.11.2015 17:26:35
- *  Author: eirikpr
- */ 
+int play_game();
+
+
+
+#endif

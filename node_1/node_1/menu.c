@@ -7,6 +7,8 @@
 #include "util/delay.h"
 #include "MCP2515.h"
 #include "can_com.h"
+#include "ADC.h"
+#include "game.h"
 
 void update_next(direction dir);
 void menu_fsm();
@@ -29,11 +31,8 @@ void menu_init(){
 	sub2.parent = &menu;
 	sub3.parent = &menu;
 	
-	
-	
 	current = &menu;
 	next = 1;
-	
 	
 	menu_print(current);
 	menu_fsm();
@@ -44,34 +43,15 @@ void menu_init(){
 void menu_fsm(){
 	direction curr_dir;
 	direction last_dir = NEUTRAL;
-	joy_position_t joystick;
-	
-	// Testing
-	can_message_t joystick_msg = {'j',1,"joystick"};
 	
 	while(1)
 	{
 		// Menu
 		menu_handler(&curr_dir, &last_dir);
 		
-		//Joystick
-		joystick_msg.data[0] = get_position().x_pos;
-		can_message_send(&joystick_msg);
-		
-		// Handle potential goals
-		if (can_get_message(&message) == 1)
-		{
-			can_handle_message(&message);
-		}
-		
 		/*        TESTING     */
-
+		
 		//message.data[1] = joystick.y_pos;
-		
-		
-		
-		
-	
 		
 		
 		_delay_ms(10);
@@ -88,22 +68,41 @@ void menu_handler(direction* curr_dir, direction* last_dir)
 	{
 		switch (*curr_dir){
 			case RIGHT:
-			//if (current->children[next]->number_children == 0){
-			//current->children[next]->fnc_pointer();
-			//}
 			
-			if (next == 3)
-			{
-				current = current->children[next-1];
-				next = 1;
-				menu_print(current);
-			}
-
+			
+				switch(current->children[next-1]->name[0]){
+					
+					case 'P':
+						current = current->children[next-1];
+						menu_print(current);
+						play_game();
+						// Handle highscore
+						current = current->parent;
+						menu_print(current);
+						
+					break;
+					case 'H':
+						
+					break;
+					case 'S':
+						current = current->children[next-1];
+						menu_print(current);
+					break;
+					case 'D' :
+					break;
+					case 'C' :
+						joy_calibrate();
+					
+					break;
+					
+					
+				}
+			
+			
 			break;
 			case LEFT:
 			if (current->parent != NULL){
 				current = current->parent;
-				next = 1;
 				menu_print(current);
 			}
 			break;
@@ -146,6 +145,7 @@ void update_next(direction dir){
 }
 
 void menu_print(menu_t* object){
+	next = 1;
 	oled_clear_all();
 	oled_goto(0,0);
 	oled_print(object->name);

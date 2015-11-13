@@ -25,7 +25,9 @@ int main(void)
 	joy_init();
 	oled_init();
 	can_init();
-
+	
+	
+	
 	// Starts the FSM
 	menu_init();
 	
