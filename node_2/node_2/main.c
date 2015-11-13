@@ -38,17 +38,15 @@ int main (void)
 	{
 
 		
-		_delay_ms(20);
+		
 		/*    TESTING    */
 		if (can_get_message(&message) == 1)
 		{
 			handle_message(&message);
 		}
 		check_and_report_goal();
-		
+		printf("enc: %d\n", encoder_read());
 	}
-	
-
 }
 
 
@@ -75,13 +73,13 @@ void handle_message(can_message_t* message)
 
 void init_solenoid(void)
 {
-	DDRB |= (1 << PB4);
-	PORTB |= (1 << PB4);
+	DDRC |= (1 << PC0);
+	PORTC |= (1 << PC0);
 }
 
 void solenoid_shoot(void)
 {
-	PORTB &= ~(1 << PB4);
+	PORTC &= ~(1 << PC0);
 	_delay_ms(75);
-	PORTB |= (1 << PB4);
+	PORTC |= (1 << PC0);
 }

@@ -8,7 +8,7 @@
 
 char motor_speed;
 
-uint16_t correct_encoder_output(uint16_t input);
+uint8_t	reverse(uint8_t x);
 
 void motor_init(void)
 {
@@ -33,18 +33,19 @@ void motor_init(void)
 
 uint16_t encoder_read( void )
 {
-	int output ;
+	uint8_t high,low;
 	PORTF &= ~(1 << PF7); // !OE = 0
 	PORTF &= ~(1 << PF5); // SET = 0 // For MSB
 	_delay_us(20);
-	output = PINK;
-	output = (output << 8);
+	high = PINK;
+	
 	PORTF |= (1 << PF5);	//SET = 1 // For LSB
 	_delay_us(20); 
-	output |= PINK;
+	low = PINK;
 	PORTF |= (1 << PF7); // !OE = 1
 	
-	return correct_encoder_output(output);
+	uint16_t out = (reverse(high) >> 8) + reverse(low);
+	return out;
 }
 
 
@@ -62,17 +63,14 @@ void motor_drive( char joystick_x )
 	i2c_transmit(0x50, &motor_speed,1);
 }
 
-uint16_t correct_encoder_output(uint16_t input)
+
+
+
+uint8_t	reverse(uint8_t x)
 {
-	uint16_t output;
-	int i,j;
-	for(i = 0; i<2; i++)
-	{
-		for(j=0 ; j<8; j++)
-		{
-			//output |=  input & (0b1111000*i + j) = ( 8*i + (7-j) );
-		}
-	}
-	return output;
-	
+	x = (((x & 0xaa) >> 1) | ((x & 0x55) << 1));
+	x = (((x & 0xcc) >> 2) | ((x & 0x33) << 2));
+	x = (((x & 0xf0) >> 4) | ((x & 0x0f) << 4));
+	return x;
+
 }
