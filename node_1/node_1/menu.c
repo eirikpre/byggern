@@ -9,6 +9,7 @@
 #include "can_com.h"
 #include "ADC.h"
 #include "game.h"
+#include <avr/eeprom.h>
 
 void update_next(direction dir);
 void menu_fsm();
@@ -18,15 +19,17 @@ void menu_print(menu_t* object);
 menu_t* current;
 int next;
 menu_t sub3sub1 = {"Calibrate",0,NULL,NULL,{}};
+menu_t sub3sub2 = {"Reset Scores",0,NULL,NULL,{}};
 menu_t sub1 = {"Play game",0,NULL,NULL,{}};
 menu_t sub2 = {"Highscores",0,NULL,NULL,{}};
-menu_t sub3 = {"Settings",1,NULL,NULL, {&sub3sub1}	};
+menu_t sub3 = {"Settings",2,NULL,NULL, {&sub3sub1, &sub3sub2}	};
 menu_t sub4 = {"Debug",0,NULL ,NULL,{}};
 menu_t menu = {"Main Menu",4,NULL,NULL,{&sub1,&sub2,&sub3,&sub4}};
 
 void menu_init(){
 
 	sub3sub1.parent= &sub3;
+	sub3sub2.parent= &sub3;
 	sub1.parent = &menu;	
 	sub2.parent = &menu;
 	sub3.parent = &menu;
@@ -62,7 +65,6 @@ void menu_fsm(){
 
 void menu_handler(direction* curr_dir, direction* last_dir)
 {
-	
 	*curr_dir = get_direction();
 	if (*curr_dir != *last_dir)
 	{
@@ -79,16 +81,20 @@ void menu_handler(direction* curr_dir, direction* last_dir)
 						current = current->parent;
 						menu_print(current);
 						
-					break;
+						break;
 					case 'H':
-						
-					break;
+						current = current->children[next-1];
+						print_highscore();
+						break;
 					case 'S':
 						current = current->children[next-1];
 						menu_print(current);
-					break;
-					case 'D' :
-					break;
+						break;
+					case 'R' :
+						reset_eeprom();
+						current = current->parent;
+						menu_print(current);
+						break;
 					case 'C' :
 						joy_calibrate();
 						current = current->parent;
