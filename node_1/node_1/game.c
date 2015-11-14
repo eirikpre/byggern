@@ -1,21 +1,16 @@
-#define F_CPU 4915200
-#include "joystick.h"
-#include "can_com.h"
-#include "game.h"
-#include "ADC.h"
 #include <string.h>
 #include <stdio.h>
-#include <util/delay.h>
-#include "oled.h"
 #include <avr/eeprom.h>
+#include "game.h"
+#include "joystick.h"
+#include "can_com.h"
+#include "ADC.h"
+#include "oled.h"
 
 int TOUCH_JOY_MODE = 1;
 
-
 can_message_t joystick_msg = {'j',2,"00000000"};
-can_message_t shot_msg = {'s',1};
 can_message_t touch_msg = {'t',1,"0000000"};
-char highscore_print[11] = "Highscores\n"; 
 	
 void check_and_report_shot( void );
 void update_eeprom( int score, uint16_t* highscore );
@@ -27,26 +22,28 @@ void play_game( void )
 	int score = 0;
 	int score_sub = 0;
 	char* score_print = "0000000000";
-	
-	can_message_t message = {'m',1,"00"};
 	joy_position_t joystick;
 	
+	can_message_t message = {'m',1,"00"};
+	
 	// Get highscores
-	for(i=0; i<5; i+=2)
+	for(i=0; i<3; i++)
 	{
-		highscore[i/2] = eeprom_read_word((uint16_t*)(i));
+		highscore[i] = eeprom_read_word((uint16_t*)(i*2));
 	}
 	
-	// Sending mode to node 2
-	message.data[0] = TOUCH_JOY_MODE;
-	can_message_send(&message);
-	
-	//Print Screen
+	//Setup OLED Screen
 	oled_clear_all();
 	oled_goto(0,0);
 	oled_print("     GAME");
 	oled_goto(3,0);
 	oled_print("    Score: ");
+	
+	// Sending game mode to node 2
+	message.data[0] = TOUCH_JOY_MODE;
+	can_message_send(&message);
+	
+	
 	
 	while(1)
 	{
@@ -96,7 +93,7 @@ void play_game( void )
 		
 void check_and_report_shot( void )
 {
-	
+	can_message_t shot_msg = {'s',1};
 	static int recent_shot = 0;
 	
 	if (recent_shot == 0)

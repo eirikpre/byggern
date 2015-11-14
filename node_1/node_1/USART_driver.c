@@ -1,4 +1,6 @@
 #include "USART_driver.h"
+#include <avr/io.h>
+#include <stdio.h>
 
 void USART_init(unsigned int ubrr){
 
@@ -12,12 +14,12 @@ void USART_init(unsigned int ubrr){
 	fdevopen(USART_transmit,USART_receive);
 }
 
-void USART_transmit(unsigned char data){
+int USART_transmit(unsigned char data){
 	
 	while(!(UCSR0A & (1<<UDRE0)))
 		;
 	UDR0 = data;
-	
+	return 0;
 }
 
 unsigned char USART_receive (void){

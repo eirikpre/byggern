@@ -1,146 +1,110 @@
-#define F_CPU 4915200
+#include <stdlib.h>
 #include "menu.h"
 #include "oled.h"
 #include "joystick.h"
-#include <stdio.h>
-#include "spi_control.h"
-#include "util/delay.h"
-#include "MCP2515.h"
-#include "can_com.h"
-#include "ADC.h"
 #include "game.h"
-#include <avr/eeprom.h>
 
-void update_next(direction dir);
-void menu_fsm();
-void menu_handler(direction* curr_dir, direction* last_dir);
-void menu_print(menu_t* object);
+void update_next(direction dir); // Updates the pointer to a menu object.
+void menu_print(menu_t* object); // Prints the menu on oled
 
 menu_t* current;
 int next;
-menu_t sub3sub1 = {"Calibrate",0,NULL,NULL,{}};
-menu_t sub3sub2 = {"Reset Scores",0,NULL,NULL,{}};
-menu_t sub1 = {"Play game",0,NULL,NULL,{}};
-menu_t sub2 = {"Highscores",0,NULL,NULL,{}};
-menu_t sub3 = {"Settings",2,NULL,NULL, {&sub3sub1, &sub3sub2}	};
-menu_t sub4 = {"Debug",0,NULL ,NULL,{}};
-menu_t menu = {"Main Menu",4,NULL,NULL,{&sub1,&sub2,&sub3,&sub4}};
+menu_t sub3sub1 = {"Calibrate"};
+menu_t sub3sub2 = {"Reset Scores"};
+menu_t sub1 = {"Play game"};
+menu_t sub2 = {"Highscores"};
+menu_t sub3 = {"Settings",2,NULL, {&sub3sub1, &sub3sub2}};
+menu_t menu = {"Main Menu",3,NULL,{&sub1,&sub2,&sub3}};
 
-void menu_init(){
-
+void menu_init()
+{
+	// Setup the hierarchy
 	sub3sub1.parent= &sub3;
 	sub3sub2.parent= &sub3;
 	sub1.parent = &menu;	
 	sub2.parent = &menu;
 	sub3.parent = &menu;
-	
 	current = &menu;
-	next = 1;
-	
 	menu_print(current);
-	menu_fsm();
-	
 }
 
-
-void menu_fsm(){
-	direction curr_dir;
-	direction last_dir = NEUTRAL;
-	
-	while(1)
-	{
-		// Menu
-		menu_handler(&curr_dir, &last_dir);
-		
-		/*        TESTING     */
-		
-		//message.data[1] = joystick.y_pos;
-		
-		
-		_delay_ms(10);
-	}
-}
-
-
-
-void menu_handler(direction* curr_dir, direction* last_dir)
+void menu_fsm()
 {
-	*curr_dir = get_direction();
-	if (*curr_dir != *last_dir)
+	static direction curr_dir;
+	static direction last_dir = NEUTRAL; 
+	
+	curr_dir = get_direction();
+	if (curr_dir != last_dir)
 	{
-		switch (*curr_dir){
+		switch (curr_dir){
 			case RIGHT:
-			
-			
-				switch(current->children[next-1]->name[0]){
+				switch(current->children[next-1]->name[0])
+				{
 					
-					case 'P':
+					case 'P':       // [P]lay Game
 						current = current->children[next-1];
 						play_game();
-						// Handle highscore
 						current = current->parent;
 						menu_print(current);
 						
 						break;
-					case 'H':
+					case 'H':		// [H]ighscores
 						current = current->children[next-1];
 						print_highscore();
 						break;
-					case 'S':
+					case 'S':		// [S]ettings
 						current = current->children[next-1];
 						menu_print(current);
 						break;
-					case 'R' :
+					case 'R' :		// [R]eset Scores
 						reset_eeprom();
 						current = current->parent;
 						menu_print(current);
 						break;
-					case 'C' :
+					case 'C' :		// [C]alibrate
 						joy_calibrate();
 						current = current->parent;
 						menu_print(current);
-					break;
-					
-					
-				}
-			
-			
+					break;				
+			}
 			break;
-			case LEFT:
+				
+		case LEFT:
 			if (current->parent != NULL){
 				current = current->parent;
 				menu_print(current);
 			}
 			break;
-			case UP:
-			
-			update_next(*curr_dir);
+		case UP:
+			update_next(curr_dir);
 			break;
-			case DOWN:
-			
-			update_next(*curr_dir);
+		case DOWN:
+			update_next(curr_dir);
 			break;
 			default:
 			break;
 		}
 	}
-	*last_dir = *curr_dir;
+	last_dir = curr_dir;
 }
 
 
 void update_next(direction dir){
-	if (dir == DOWN) {
-		if (next+1 <= current->number_children){
+	if (dir == DOWN)
+	{
+		if (next+1 <= current->number_children)
+		{
 			oled_goto(next,0);
 			oled_print(" ");
 			next++;
 			oled_goto(next,0);
 			oled_print("-");
 		}
-		
 	}
-	else{
-		if (next > 1){
+	else
+	{
+		if (next > 1)
+		{
 			oled_goto(next,0);
 			oled_print(" ");
 			next--;
