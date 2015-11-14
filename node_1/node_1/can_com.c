@@ -1,6 +1,6 @@
 #include "can_com.h"
 #include <stdio.h>
-#include "MCP2515.h"
+#include "driver/MCP2515.h"
 
 void can_init()
 {
@@ -29,7 +29,6 @@ void can_message_send(can_message_t *message)
 	for (i = 0; i< message->length; i++){
 		mcp2515_write(MCP_TXB0CTRL + 6 + i, *((message->data)+i) );
 	}
-	
 	mcp2515_request_to_send(MCP_RTS_TX0);
 }
 
@@ -48,7 +47,6 @@ void can_message_receive(can_message_t* message, int buffer)
 	{
 		*((message->data)+i)  = mcp2515_read(MCP_RXB0CTRL+buffer + 6 + i );
 	}
-	
 }
 
 int can_get_message(can_message_t* message)
@@ -60,12 +58,6 @@ int can_get_message(can_message_t* message)
 		mcp2515_bit_modify(MCP_CANINTF,0x01,0x00);
 		return 1;
 	}
-	/*else if ((mcp2515_read(MCP_CANINTF) & 0x02) == 0x02)
-	{
-		can_message_receive(message,1);
-		mcp2515_bit_modify(MCP_CANINTF,0x02,0x00);
-		return 1;
-	}*/
 	else
 	{
 		return 0;
@@ -77,22 +69,16 @@ void can_handle_message(can_message_t* message)
 {
 	switch (message->id)
 	{
-		case 'p' :				// Print
+		case 'p' :				
 			can_print(message);
 			break;	
 		case 'j' : 
 			can_print(message);
 			break;
-		//case 'g' :
-			//add_goal();
-			//break;
 		default:
-			can_print(message);					//do nothing 
+			can_print(message);	
 			break;
 	}
-	
-	
-	
 }
 
 
@@ -100,7 +86,7 @@ void can_print(can_message_t* msg)
 {
 	printf("ID: %c ,Length: %d, ",msg->id,msg->length);
 	int i ;
-	for (i = 0; i < msg->length ; i++) //msg->length
+	for (i = 0; i < msg->length ; i++) 
 	{
 		printf("%c", msg->data[i]);
 	}

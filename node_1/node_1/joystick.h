@@ -15,12 +15,10 @@ typedef struct{
 	int y_pos;
 }joy_position_t;
 
-
-
 void joy_init();
 
-joy_position_t get_position();
-direction get_direction();
+joy_position_t joy_read();
+direction joy_get_direction();
 void joy_calibrate();
 
 #endif

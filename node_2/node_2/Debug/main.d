@@ -19,8 +19,8 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\math.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././servo.h ../src/can_com.h ../src/MCP2515.h ../src/spi_control.h \
- .././src\ADC.h .././USART_driver.h .././motor.h .././i2c.h
+ .././servo.h .././can_com.h .././driver/spi_control.h .././driver/ADC.h \
+ .././driver/USART_driver.h .././driver/motor.h .././driver/i2c.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -64,16 +64,14 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 .././servo.h:
 
-../src/can_com.h:
+.././can_com.h:
 
-../src/MCP2515.h:
+.././driver/spi_control.h:
 
-../src/spi_control.h:
+.././driver/ADC.h:
 
-.././src\ADC.h:
+.././driver/USART_driver.h:
 
-.././USART_driver.h:
+.././driver/motor.h:
 
-.././motor.h:
-
-.././i2c.h:
+.././driver/i2c.h:

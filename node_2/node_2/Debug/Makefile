@@ -33,19 +33,21 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
+../driver \
 ../src/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../can_com.c \
+../driver/ADC.c \
+../driver/i2c.c \
+../driver/MCP2515.c \
+../driver/motor.c \
+../driver/servo.c \
+../driver/spi_control.c \
+../driver/USART_driver.c \
 ../main.c \
-../motor.c \
-../servo.c \
-../src/ADC.c \
-../src/can_com.c \
-../src/MCP2515.c \
-../src/spi_control.c \
-../i2c.c \
 ../USART_driver.c
 
 
@@ -56,47 +58,51 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+can_com.o \
+driver/ADC.o \
+driver/i2c.o \
+driver/MCP2515.o \
+driver/motor.o \
+driver/servo.o \
+driver/spi_control.o \
+driver/USART_driver.o \
 main.o \
-motor.o \
-servo.o \
-src/ADC.o \
-src/can_com.o \
-src/MCP2515.o \
-src/spi_control.o \
-i2c.o \
 USART_driver.o
 
 OBJS_AS_ARGS +=  \
+can_com.o \
+driver/ADC.o \
+driver/i2c.o \
+driver/MCP2515.o \
+driver/motor.o \
+driver/servo.o \
+driver/spi_control.o \
+driver/USART_driver.o \
 main.o \
-motor.o \
-servo.o \
-src/ADC.o \
-src/can_com.o \
-src/MCP2515.o \
-src/spi_control.o \
-i2c.o \
 USART_driver.o
 
 C_DEPS +=  \
+can_com.d \
+driver/ADC.d \
+driver/i2c.d \
+driver/MCP2515.d \
+driver/motor.d \
+driver/servo.d \
+driver/spi_control.d \
+driver/USART_driver.d \
 main.d \
-motor.d \
-servo.d \
-src/ADC.d \
-src/can_com.d \
-src/MCP2515.d \
-src/spi_control.d \
-i2c.d \
 USART_driver.d
 
 C_DEPS_AS_ARGS +=  \
+can_com.d \
+driver/ADC.d \
+driver/i2c.d \
+driver/MCP2515.d \
+driver/motor.d \
+driver/servo.d \
+driver/spi_control.d \
+driver/USART_driver.d \
 main.d \
-motor.d \
-servo.d \
-src/ADC.d \
-src/can_com.d \
-src/MCP2515.d \
-src/spi_control.d \
-i2c.d \
 USART_driver.d
 
 OUTPUT_FILE_PATH +=node_2.elf
@@ -132,6 +138,8 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
 ./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
@@ -139,7 +147,7 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
-src/%.o: ../src/%.c
+driver/%.o: ../driver/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DBOARD=USER_BOARD  -I"../common/applications/user_application/user_board/config" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/mega/utils" -I"../src/ASF/common/utils" -I"../src/ASF/mega/utils/preprocessor" -I"../src" -I"../src/ASF/common/boards/user_board"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g3 -Wall -mmcu=atmega2560 -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

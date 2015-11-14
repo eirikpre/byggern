@@ -4,8 +4,8 @@
 #include "game.h"
 #include "joystick.h"
 #include "can_com.h"
-#include "ADC.h"
-#include "oled.h"
+#include "driver/ADC.h"
+#include "driver/oled.h"
 
 int TOUCH_JOY_MODE = 1;
 
@@ -13,7 +13,7 @@ can_message_t joystick_msg = {'j',2,"00000000"};
 can_message_t touch_msg = {'t',1,"0000000"};
 	
 void check_and_report_shot( void );
-void update_eeprom( int score, uint16_t* highscore );
+void update_highscore( int score, uint16_t* highscore );
 
 void play_game( void )
 {
@@ -43,62 +43,52 @@ void play_game( void )
 	message.data[0] = TOUCH_JOY_MODE;
 	can_message_send(&message);
 	
-	
-	
 	while(1)
 	{
-		//Joystick
-		joystick =  get_position();
+		//Read input from multifunction card
+		joystick =  joy_read();
 		joystick_msg.data[0] = joystick.x_pos;
 		joystick_msg.data[1] = joystick.y_pos;
 		can_message_send(&joystick_msg);
-		
 		if (TOUCH_JOY_MODE == 1){
 			touch_msg.data[0] = ADC_read(2);
 			can_message_send(&touch_msg);	
 		}
+		// Check for pressed shot button
+		check_and_report_shot();
 		
-		// Handle potential goals
+		// Handle game over
 		if (can_get_message(&message) == 1)
 		{
-			if(message.id == 'g')	// Goal
-			{
-				break;
-			}
+			if(message.id == 'g') break;	// Goal
 		}
-		
-		// Check for shot button
-		check_and_report_shot();
 		
 		// Check for quit
 		if ( (ADC_read(2) > 180 && TOUCH_JOY_MODE == 0) || (ADC_read(0) > 200 && TOUCH_JOY_MODE == 1) ) break;
 		
-		// Print Score
+		// Print Score on oled
 		oled_goto(4, 0);
 		sprintf(score_print,"       %d",score);
 		oled_print(score_print);
 		
-		// Add score
+		// Increment score
 		if(score_sub++ > 700)
 		{
 			score_sub = 0;
 			score++;
 		}
 	}
-	update_eeprom(score,highscore);
+	update_highscore(score,highscore);
 	return;
 }
-
-
 		
 void check_and_report_shot( void )
 {
 	can_message_t shot_msg = {'s',1};
 	static int recent_shot = 0;
-	
 	if (recent_shot == 0)
 	{
-		if(ADC_read(3) > 100)
+		if(ADC_read(3) > 100) //read input from multifunction card
 		{
 			can_message_send(&shot_msg);
 			recent_shot = 1;
@@ -108,17 +98,14 @@ void check_and_report_shot( void )
 	{
 		if (ADC_read(3) < 100){
 			recent_shot = 0;
-
 		}
 	}
 }
 
 void print_highscore( void )
 {
-
-	
 	int i;
-	char* temp = "00000000000000000";
+	char* temp = "000000000000000";
 
 	oled_clear_all();
 	oled_goto(0,0);
@@ -126,15 +113,13 @@ void print_highscore( void )
 	for (i=0; i<3 ;i++)
 	{
 		oled_goto(i+2,8);
-		sprintf(temp,"%d. %d",i+1,eeprom_read_word((uint16_t*)(i*2)));
+		sprintf(temp,"%d. %d    ",i+1,eeprom_read_word((uint16_t*)(i*2)));
 		oled_print(temp);
 	}
-
-	
 	return;
 }
 
-void update_eeprom( int score, uint16_t* highscore )
+void update_highscore( int score, uint16_t* highscore )
 {
 	if (score > highscore[0])
 	{
@@ -153,7 +138,7 @@ void update_eeprom( int score, uint16_t* highscore )
 	}
 }
 
-void reset_eeprom ( void )
+void reset_highscore ( void )
 {
 	eeprom_write_word((uint16_t*)0, 0 );	//	Reset the highscores
 	eeprom_write_word((uint16_t*)2, 0 );

@@ -175,52 +175,65 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="driver" />
     <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="can_com.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can_com.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\ADC.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\ADC.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\i2c.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\i2c.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\MCP2515.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\MCP2515.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\motor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\servo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\servo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\spi_control.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\spi_control.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\USART_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\USART_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="motor.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="motor.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="servo.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="servo.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ADC.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ADC.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\can_com.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\can_com.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\MCP2515.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\MCP2515.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\spi_control.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\spi_control.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="i2c.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="i2c.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="USART_driver.c">

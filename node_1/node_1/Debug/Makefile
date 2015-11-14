@@ -32,22 +32,23 @@ LIB_DEP:=
 LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
-SUBDIRS := 
+SUBDIRS :=  \
+../driver
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../ADC.c \
+../driver/ADC.c \
+../driver/MCP2515.c \
+../driver/oled.c \
+../driver/spi_control.c \
+../driver/USART_driver.c \
 ../game.c \
 ../main.c \
 ../can_com.c \
-../MCP2515.c \
 ../joystick.c \
 ../menu.c \
-../oled.c \
-../spi_control.c \
-../SRAM_test.c \
-../USART_driver.c
+../SRAM_test.c
 
 
 PREPROCESSING_SRCS += 
@@ -57,56 +58,56 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-ADC.o \
+driver/ADC.o \
+driver/MCP2515.o \
+driver/oled.o \
+driver/spi_control.o \
+driver/USART_driver.o \
 game.o \
 main.o \
 can_com.o \
-MCP2515.o \
 joystick.o \
 menu.o \
-oled.o \
-spi_control.o \
-SRAM_test.o \
-USART_driver.o
+SRAM_test.o
 
 OBJS_AS_ARGS +=  \
-ADC.o \
+driver/ADC.o \
+driver/MCP2515.o \
+driver/oled.o \
+driver/spi_control.o \
+driver/USART_driver.o \
 game.o \
 main.o \
 can_com.o \
-MCP2515.o \
 joystick.o \
 menu.o \
-oled.o \
-spi_control.o \
-SRAM_test.o \
-USART_driver.o
+SRAM_test.o
 
 C_DEPS +=  \
-ADC.d \
+driver/ADC.d \
+driver/MCP2515.d \
+driver/oled.d \
+driver/spi_control.d \
+driver/USART_driver.d \
 game.d \
 main.d \
 can_com.d \
-MCP2515.d \
 joystick.d \
 menu.d \
-oled.d \
-spi_control.d \
-SRAM_test.d \
-USART_driver.d
+SRAM_test.d
 
 C_DEPS_AS_ARGS +=  \
-ADC.d \
+driver/ADC.d \
+driver/MCP2515.d \
+driver/oled.d \
+driver/spi_control.d \
+driver/USART_driver.d \
 game.d \
 main.d \
 can_com.d \
-MCP2515.d \
 joystick.d \
 menu.d \
-oled.d \
-spi_control.d \
-SRAM_test.d \
-USART_driver.d
+SRAM_test.d
 
 OUTPUT_FILE_PATH +=node_1.elf
 
@@ -144,6 +145,13 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+driver/%.o: ../driver/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
 
 ./%.o: .././%.c
 	@echo Building file: $<

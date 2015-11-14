@@ -15,7 +15,8 @@ game.d game.o: .././game.c \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\lock.h \
- .././game.h .././joystick.h .././can_com.h .././ADC.h .././oled.h
+ .././game.h .././joystick.h .././can_com.h .././driver/ADC.h \
+ .././driver/oled.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\string.h:
 
@@ -55,6 +56,6 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 .././can_com.h:
 
-.././ADC.h:
+.././driver/ADC.h:
 
-.././oled.h:
+.././driver/oled.h:

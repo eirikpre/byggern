@@ -1,6 +1,6 @@
 #include <stdlib.h>
+#include "driver/oled.h"
 #include "menu.h"
-#include "oled.h"
 #include "joystick.h"
 #include "game.h"
 
@@ -9,18 +9,17 @@ void menu_print(menu_t* object); // Prints the menu on oled
 
 menu_t* current;
 int next;
-menu_t sub3sub1 = {"Calibrate"};
-menu_t sub3sub2 = {"Reset Scores"};
+
+menu_t sub3sub1 = {"Reset Scores"};
 menu_t sub1 = {"Play game"};
 menu_t sub2 = {"Highscores"};
-menu_t sub3 = {"Settings",2,NULL, {&sub3sub1, &sub3sub2}};
+menu_t sub3 = {"Settings",1,NULL, { &sub3sub1}};
 menu_t menu = {"Main Menu",3,NULL,{&sub1,&sub2,&sub3}};
 
 void menu_init()
 {
 	// Setup the hierarchy
 	sub3sub1.parent= &sub3;
-	sub3sub2.parent= &sub3;
 	sub1.parent = &menu;	
 	sub2.parent = &menu;
 	sub3.parent = &menu;
@@ -33,38 +32,32 @@ void menu_fsm()
 	static direction curr_dir;
 	static direction last_dir = NEUTRAL; 
 	
-	curr_dir = get_direction();
+	curr_dir = joy_get_direction();
 	if (curr_dir != last_dir)
 	{
 		switch (curr_dir){
-			case RIGHT:
-				switch(current->children[next-1]->name[0])
-				{
+		case RIGHT:
+			switch(current->children[next-1]->name[0])
+			{
 					
-					case 'P':       // [P]lay Game
-						current = current->children[next-1];
-						play_game();
-						current = current->parent;
-						menu_print(current);
-						
-						break;
-					case 'H':		// [H]ighscores
-						current = current->children[next-1];
-						print_highscore();
-						break;
-					case 'S':		// [S]ettings
-						current = current->children[next-1];
-						menu_print(current);
-						break;
-					case 'R' :		// [R]eset Scores
-						reset_eeprom();
-						current = current->parent;
-						menu_print(current);
-						break;
-					case 'C' :		// [C]alibrate
-						joy_calibrate();
-						current = current->parent;
-						menu_print(current);
+				case 'P':       // [P]lay Game
+					current = current->children[next-1];
+					play_game();
+					current = current->parent;
+					menu_print(current);
+					break;
+				case 'H':		// [H]ighscores
+					current = current->children[next-1];
+					print_highscore();
+					break;
+				case 'S':		// [S]ettings
+					current = current->children[next-1];
+					menu_print(current);
+					break;
+				case 'R' :		// [R]eset Scores
+					reset_highscore();
+					current = &menu;
+					menu_print(current);
 					break;				
 			}
 			break;

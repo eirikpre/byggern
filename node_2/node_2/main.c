@@ -7,13 +7,13 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#include "servo.h"
+
 #include "can_com.h"
-#include "MCP2515.h"
-#include "spi_control.h"
-#include "src\ADC.h"
-#include "USART_driver.h"
-#include "motor.h"
+#include "driver/servo.h"
+#include "driver/spi_control.h"
+#include "driver/ADC.h"
+#include "driver/USART_driver.h"
+#include "driver/motor.h"
 
 
 void solenoid_shoot(void);
