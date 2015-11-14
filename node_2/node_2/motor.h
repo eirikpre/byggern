@@ -6,3 +6,4 @@
 void motor_drive( char joystick_x );
 void motor_init ( void );
 uint16_t encoder_read( void );
+void position_controller( char pos );

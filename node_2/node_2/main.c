@@ -45,26 +45,42 @@ int main (void)
 			handle_message(&message);
 		}
 		check_and_report_goal();
-		printf("enc: %d\n", encoder_read());
+		
 	}
 }
 
-
+ 
 void handle_message(can_message_t* message)
 {
+	static int TOUCH_JOY_MODE = 0;
 	switch (message->id)
 	{
 		case 'p' :				// Print
 			can_print(message);
 			break;
 		case 'j' :
-			motor_drive( message->data[0] );				//	X - value
-			servo_write( message->data[1] * 5.0 + 1450 );	//	Y - value
+			if(TOUCH_JOY_MODE == 0){
+				servo_write( message->data[1] * 5.0 + 1450 );	//	Y - value
+				motor_drive( message->data[0] );
+			}
+			else
+			{
+				servo_write( - message->data[0] * 5.0 + 1450 );	//	X - value
+			}
 			break;
 		case 's' :
 			solenoid_shoot();
+			break;
+		case 't' :	
+			position_controller( -message->data[0] );				//	X - value
+			break;
 			
-		
+		case 'm' : 
+			TOUCH_JOY_MODE = message->data[0];
+			// Reset motor when new game with touch-slider
+			motor_init();
+			break;
+			
 		default:
 			can_print(message);
 			break;

@@ -74,7 +74,6 @@ void menu_handler(direction* curr_dir, direction* last_dir)
 					
 					case 'P':
 						current = current->children[next-1];
-						menu_print(current);
 						play_game();
 						// Handle highscore
 						current = current->parent;
@@ -92,7 +91,8 @@ void menu_handler(direction* curr_dir, direction* last_dir)
 					break;
 					case 'C' :
 						joy_calibrate();
-					
+						current = current->parent;
+						menu_print(current);
 					break;
 					
 					

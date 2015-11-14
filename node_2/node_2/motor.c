@@ -6,7 +6,7 @@
 #include "motor.h"
 
 
-char motor_speed;
+int16_t ref_pos;
 
 uint8_t	reverse(uint8_t x);
 
@@ -28,6 +28,9 @@ void motor_init(void)
 	PORTF &= ~(1 << PF6);
 	_delay_us(5);
 	PORTF |= (1 << PF6);
+	
+	ref_pos = encoder_read();
+
 
 }
 
@@ -44,9 +47,25 @@ uint16_t encoder_read( void )
 	low = PINK;
 	PORTF |= (1 << PF7); // !OE = 1
 	
-	uint16_t out = (reverse(high) >> 8) + reverse(low);
-	return out;
+	high = reverse(high);
+	low = reverse(low);
+	
+	
+	return (high << 8) + low;
 }
+
+
+void position_controller( char pos )
+{
+	int16_t rotations = encoder_read();
+	int16_t prefered_rotations = ref_pos + ( ( (int32_t)pos ) * 8000.0) / 255;
+	int16_t error = -prefered_rotations + rotations;
+	char to_motor = error >> 6;
+
+	motor_drive(to_motor*2);
+	
+}
+
 
 
 void motor_drive( char joystick_x )
@@ -59,12 +78,10 @@ void motor_drive( char joystick_x )
 		PORTF |= (1 << PF3);
 	}
 	// Set speed
-	motor_speed = (char)((abs((float)joystick_x)*150)/100);
+	char motor_speed = (char)((abs((float)joystick_x)*150)/100);
+	if (motor_speed > 50) {motor_speed = 70;}
 	i2c_transmit(0x50, &motor_speed,1);
 }
-
-
-
 
 uint8_t	reverse(uint8_t x)
 {
@@ -72,5 +89,4 @@ uint8_t	reverse(uint8_t x)
 	x = (((x & 0xcc) >> 2) | ((x & 0x33) << 2));
 	x = (((x & 0xf0) >> 4) | ((x & 0x0f) << 4));
 	return x;
-
 }
