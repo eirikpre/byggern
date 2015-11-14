@@ -7,9 +7,6 @@
 #include "menu.h"
 #include "joystick.h"
 
-/*          TESTING          */
-#include "SRAM_test.h"
-
 int main(void)
 {	
 	// Activate external memory
@@ -22,8 +19,6 @@ int main(void)
 	can_init();
 	menu_init();
 	
-	/*          TESTING          */
-	SRAM_test();
 	
 	// Starts the FSM
 	while(1)
