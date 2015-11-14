@@ -4,6 +4,8 @@
 
 driver\ADC.c
 
+driver\can_com.c
+
 driver\MCP2515.c
 
 driver\oled.c
@@ -15,8 +17,6 @@ driver\USART_driver.c
 game.c
 
 main.c
-
-can_com.c
 
 joystick.c
 

@@ -2,9 +2,9 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-can_com.c
-
 driver\ADC.c
+
+driver\can_com.c
 
 driver\i2c.c
 
@@ -14,11 +14,13 @@ driver\motor.c
 
 driver\servo.c
 
+driver\solenoid.c
+
 driver\spi_control.c
 
 driver\USART_driver.c
 
-main.c
+goal.c
 
-USART_driver.c
+main.c
 

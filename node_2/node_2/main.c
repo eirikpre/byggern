@@ -1,23 +1,17 @@
-#define F_OSC 16000000
-#define F_CPU F_OSC
-
 #include <avr/io.h>
 #include <string.h>
 #include <stdio.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
 
-
-#include "can_com.h"
+#include "driver/can_com.h"
 #include "driver/servo.h"
 #include "driver/spi_control.h"
 #include "driver/ADC.h"
 #include "driver/USART_driver.h"
 #include "driver/motor.h"
+#include "driver/solenoid.h"
+#include "goal.h"
 
 
-void solenoid_shoot(void);
-void init_solenoid(void);
 can_message_t message;
 
 void handle_message(can_message_t* message);
@@ -31,21 +25,15 @@ int main (void)
 	motor_init();
 	init_solenoid();
 
-	DDRF = 0xFF; // MJ1 output
 	
 
 	while (1)
 	{
-
-		
-		
-		/*    TESTING    */
 		if (can_get_message(&message) == 1)
 		{
 			handle_message(&message);
 		}
 		check_and_report_goal();
-		
 	}
 }
 
@@ -87,15 +75,3 @@ void handle_message(can_message_t* message)
 	}
 }
 
-void init_solenoid(void)
-{
-	DDRC |= (1 << PC0);
-	PORTC |= (1 << PC0);
-}
-
-void solenoid_shoot(void)
-{
-	PORTC &= ~(1 << PC0);
-	_delay_ms(75);
-	PORTC |= (1 << PC0);
-}

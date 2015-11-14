@@ -10,16 +10,17 @@ void menu_print(menu_t* object); // Prints the menu on oled
 menu_t* current;
 int next;
 
-menu_t sub3sub1 = {"Reset Scores"};
-menu_t sub1 = {"Play game"};
-menu_t sub2 = {"Highscores"};
-menu_t sub3 = {"Settings",1,NULL, { &sub3sub1}};
-menu_t menu = {"Main Menu",3,NULL,{&sub1,&sub2,&sub3}};
 
 void menu_init()
 {
-	// Setup the hierarchy
+	// Setup the menu hierarchy
+	sub3sub1sub1.parent = &sub3sub2;
+	sub3sub1sub2.parent = &sub3sub2;
+	sub3sub3sub1.parent = &sub3sub3;
+	sub3sub3sub2.parent = &sub3sub3;
 	sub3sub1.parent= &sub3;
+	sub3sub2.parent= &sub3;
+	sub3sub3.parent= &sub3;
 	sub1.parent = &menu;	
 	sub2.parent = &menu;
 	sub3.parent = &menu;
@@ -42,23 +43,43 @@ void menu_fsm()
 					
 				case 'P':       // [P]lay Game
 					current = current->children[next-1];
-					play_game();
+					game_play();
 					current = current->parent;
 					menu_print(current);
 					break;
 				case 'H':		// [H]ighscores
 					current = current->children[next-1];
-					print_highscore();
+					game_print_highscore();
 					break;
-				case 'S':		// [S]ettings
+				default:	// [S]ettings & [C]hoose Input
 					current = current->children[next-1];
 					menu_print(current);
 					break;
 				case 'R' :		// [R]eset Scores
-					reset_highscore();
+					game_reset_highscore();
 					current = &menu;
 					menu_print(current);
-					break;				
+					break;	
+				case 'T' :		// [T]ouch as input	
+					game_change_mode( 1 );
+					current = &menu;
+					menu_print(current);
+					break;	
+				case 'J' :		// [J]oystick as input
+					game_change_mode( 0 );
+					current = &menu;
+					menu_print(current);
+					break;
+				case 'M' :		// [M]edium as difficulty
+					game_change_difficulty( 2 );
+					current = &menu;
+					menu_print(current);
+					break;
+				case 'E' :		// [E]asy as difficulty	
+					game_change_difficulty( 1 );
+					current = &menu;
+					menu_print(current);
+					break;
 			}
 			break;
 				

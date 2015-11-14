@@ -1,10 +1,3 @@
-/*
- * SRAM_test.c
- *
- * Created: 04.09.2015 13:25:38
- *  Author: haavardo
- */ 
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <avr/io.h>

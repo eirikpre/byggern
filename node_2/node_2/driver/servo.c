@@ -9,11 +9,9 @@ int us_to_compare(float us);
 
 void servo_init(void)
 {
-
 	// Fast PWM mode		
 	TCCR1A |=  (1 << WGM11); 
 	TCCR1B |=  (1 << WGM13) | (1 << WGM12);	
-	
 	
 	// Prescale
 	TCCR1B |= (1 << CS11);
@@ -26,11 +24,10 @@ void servo_init(void)
 	ICR1 = TOP_VALUE;
 	
 	// Compare register
-	OCR1A = us_to_compare(900);
+	OCR1A = us_to_compare(1500);
 	
 	// Enable output
 	DDRB |= (1 << PB5);
-
 }
 
 int us_to_compare(float us)
@@ -38,10 +35,9 @@ int us_to_compare(float us)
 	return ( (us / 20000.0 ) * TOP_VALUE );
 }
 
-
 void servo_write(float val)
 {
-	if(val > 900.0 && val < 2050.0)
+	if(val > 950.0 && val < 2050.0)
 	{
 		OCR1A = us_to_compare(val);
 	}

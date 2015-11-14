@@ -39,13 +39,13 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../driver/ADC.c \
+../driver/can_com.c \
 ../driver/MCP2515.c \
 ../driver/oled.c \
 ../driver/spi_control.c \
 ../driver/USART_driver.c \
 ../game.c \
 ../main.c \
-../can_com.c \
 ../joystick.c \
 ../menu.c \
 ../SRAM_test.c
@@ -59,52 +59,52 @@ ASM_SRCS +=
 
 OBJS +=  \
 driver/ADC.o \
+driver/can_com.o \
 driver/MCP2515.o \
 driver/oled.o \
 driver/spi_control.o \
 driver/USART_driver.o \
 game.o \
 main.o \
-can_com.o \
 joystick.o \
 menu.o \
 SRAM_test.o
 
 OBJS_AS_ARGS +=  \
 driver/ADC.o \
+driver/can_com.o \
 driver/MCP2515.o \
 driver/oled.o \
 driver/spi_control.o \
 driver/USART_driver.o \
 game.o \
 main.o \
-can_com.o \
 joystick.o \
 menu.o \
 SRAM_test.o
 
 C_DEPS +=  \
 driver/ADC.d \
+driver/can_com.d \
 driver/MCP2515.d \
 driver/oled.d \
 driver/spi_control.d \
 driver/USART_driver.d \
 game.d \
 main.d \
-can_com.d \
 joystick.d \
 menu.d \
 SRAM_test.d
 
 C_DEPS_AS_ARGS +=  \
 driver/ADC.d \
+driver/can_com.d \
 driver/MCP2515.d \
 driver/oled.d \
 driver/spi_control.d \
 driver/USART_driver.d \
 game.d \
 main.d \
-can_com.d \
 joystick.d \
 menu.d \
 SRAM_test.d

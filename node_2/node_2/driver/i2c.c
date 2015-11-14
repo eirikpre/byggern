@@ -24,8 +24,10 @@ char i2c_start(char address)
 	
 	// load slave address into data register
 	TWDR = address;
+	
 	// start transmission of address
 	TWCR = (1<<TWINT) | (1<<TWEN);
+	
 	// wait for end of transmission
 	while( !(TWCR & (1<<TWINT)) );
 	

@@ -33,22 +33,22 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
-../driver \
-../src/
+../driver
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../can_com.c \
 ../driver/ADC.c \
+../driver/can_com.c \
 ../driver/i2c.c \
 ../driver/MCP2515.c \
 ../driver/motor.c \
 ../driver/servo.c \
+../driver/solenoid.c \
 ../driver/spi_control.c \
 ../driver/USART_driver.c \
-../main.c \
-../USART_driver.c
+../goal.c \
+../main.c
 
 
 PREPROCESSING_SRCS += 
@@ -58,52 +58,56 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-can_com.o \
 driver/ADC.o \
+driver/can_com.o \
 driver/i2c.o \
 driver/MCP2515.o \
 driver/motor.o \
 driver/servo.o \
+driver/solenoid.o \
 driver/spi_control.o \
 driver/USART_driver.o \
-main.o \
-USART_driver.o
+goal.o \
+main.o
 
 OBJS_AS_ARGS +=  \
-can_com.o \
 driver/ADC.o \
+driver/can_com.o \
 driver/i2c.o \
 driver/MCP2515.o \
 driver/motor.o \
 driver/servo.o \
+driver/solenoid.o \
 driver/spi_control.o \
 driver/USART_driver.o \
-main.o \
-USART_driver.o
+goal.o \
+main.o
 
 C_DEPS +=  \
-can_com.d \
 driver/ADC.d \
+driver/can_com.d \
 driver/i2c.d \
 driver/MCP2515.d \
 driver/motor.d \
 driver/servo.d \
+driver/solenoid.d \
 driver/spi_control.d \
 driver/USART_driver.d \
-main.d \
-USART_driver.d
+goal.d \
+main.d
 
 C_DEPS_AS_ARGS +=  \
-can_com.d \
 driver/ADC.d \
+driver/can_com.d \
 driver/i2c.d \
 driver/MCP2515.d \
 driver/motor.d \
 driver/servo.d \
+driver/solenoid.d \
 driver/spi_control.d \
 driver/USART_driver.d \
-main.d \
-USART_driver.d
+goal.d \
+main.d
 
 OUTPUT_FILE_PATH +=node_2.elf
 
@@ -140,14 +144,16 @@ LINKER_SCRIPT_DEP+=
 
 
 
-./%.o: .././%.c
+
+
+driver/%.o: ../driver/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DBOARD=USER_BOARD  -I"../common/applications/user_application/user_board/config" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/mega/utils" -I"../src/ASF/common/utils" -I"../src/ASF/mega/utils/preprocessor" -I"../src" -I"../src/ASF/common/boards/user_board"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g3 -Wall -mmcu=atmega2560 -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-driver/%.o: ../driver/%.c
+./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -DDEBUG -DBOARD=USER_BOARD  -I"../common/applications/user_application/user_board/config" -I"../src/config" -I"../src/ASF/common/boards" -I"../src/ASF/mega/utils" -I"../src/ASF/common/utils" -I"../src/ASF/mega/utils/preprocessor" -I"../src" -I"../src/ASF/common/boards/user_board"  -O1 -fdata-sections -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g3 -Wall -mmcu=atmega2560 -c -std=gnu99 -fno-strict-aliasing -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -mrelax -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

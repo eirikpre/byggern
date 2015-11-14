@@ -3,9 +3,12 @@
 #include <avr/io.h>
 #include "driver/USART_driver.h"
 #include "driver/oled.h"
+#include "driver/can_com.h"
 #include "menu.h"
-#include "can_com.h"
 #include "joystick.h"
+
+/*          TESTING          */
+#include "SRAM_test.h"
 
 int main(void)
 {	
@@ -18,6 +21,9 @@ int main(void)
 	oled_init();
 	can_init();
 	menu_init();
+	
+	/*          TESTING          */
+	SRAM_test();
 	
 	// Starts the FSM
 	while(1)

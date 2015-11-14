@@ -115,6 +115,12 @@
     <Compile Include="driver\ADC.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="driver\can_com.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\can_com.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="driver\MCP2515.c">
       <SubType>compile</SubType>
     </Compile>
@@ -149,12 +155,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="can_com.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="can_com.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="joystick.c">

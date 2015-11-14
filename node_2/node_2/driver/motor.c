@@ -14,7 +14,7 @@ void motor_init(void)
 {
 	
 	i2c_init();
-	DDRF = 0xff;
+	DDRF = 0xFF; // MJ1 output
 	DDRK = 0x00;
 	
 	PORTF |= (1 << PF4); // Enable motor
@@ -30,8 +30,6 @@ void motor_init(void)
 	PORTF |= (1 << PF6);
 	
 	ref_pos = encoder_read();
-
-
 }
 
 uint16_t encoder_read( void )
@@ -50,10 +48,8 @@ uint16_t encoder_read( void )
 	high = reverse(high);
 	low = reverse(low);
 	
-	
 	return (high << 8) + low;
 }
-
 
 void position_controller( char pos )
 {
@@ -63,10 +59,7 @@ void position_controller( char pos )
 	char to_motor = error >> 6;
 
 	motor_drive(to_motor*2);
-	
 }
-
-
 
 void motor_drive( char joystick_x )
 {
@@ -79,7 +72,8 @@ void motor_drive( char joystick_x )
 	}
 	// Set speed
 	char motor_speed = (char)((abs((float)joystick_x)*150)/100);
-	if (motor_speed > 50) {motor_speed = 70;}
+	if (motor_speed > 50) motor_speed = 70;
+	
 	i2c_transmit(0x50, &motor_speed,1);
 }
 
