@@ -60,7 +60,9 @@ void handle_message(can_message_t* message)
 			solenoid_shoot();
 			break;
 		case 't' :	
-			position_controller( -message->data[0] );				//	X - value
+			if(TOUCH_JOY_MODE == 1){
+				position_controller( -message->data[0] );				//	X - value
+			}
 			break;
 			
 		case 'm' : 

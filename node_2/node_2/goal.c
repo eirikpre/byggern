@@ -4,7 +4,7 @@
 #include "driver/can_com.h"
 
 void check_and_report_goal( void ){
-	int threshold = 10;
+	int threshold = 4;
 	static int recent_goal = 0;
 	static int recent_goal_counter = 0;
 	can_message_t goal_msg = {'g',0};

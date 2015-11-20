@@ -81,13 +81,10 @@ void game_play( void )
 		}
 	}
 	// Stop node 2 from running
-	joystick_msg.data[0] = 0;
-	joystick_msg.data[1] = 0;
-	can_message_send(&joystick_msg);
-	if (TOUCH_JOY_MODE == 1){
-		touch_msg.data[0] = 128;
-		can_message_send(&touch_msg);
-	}
+	
+	message.id = 'm';
+	message.data[0] = 0;
+	can_message_send(&message);
 
 	game_update_highscore(score,highscore);
 	game_over_screen(score_print);

@@ -21,7 +21,7 @@ void motor_init(void)
 	
 	//Move to known reference point
 	motor_drive(-50);
-	_delay_ms(700);
+	_delay_ms(1000);
 	motor_drive(0);
 	
 	//Toggle reset encoder
